@@ -4,6 +4,8 @@ import { createRoot } from "react-dom/client";
 import App from "./App";
 import "./styles.css";
 
+document.title = "Aditya";
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <App />
