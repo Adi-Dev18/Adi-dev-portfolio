@@ -1,29 +1,25 @@
 import { Nav } from "@/components/Nav";
 import { Hero } from "@/components/Hero";
-import { About } from "@/components/About";
-import { Skills } from "@/components/Skills";
+
+import { TechStack } from "@/components/TechStack";
 import { Projects } from "@/components/Projects";
 import { Hackathons } from "@/components/Hackathons";
-import { Certifications } from "@/components/Certifications";
-import { LearningJourney } from "@/components/LearningJourney";
-import { Contact } from "@/components/Contact";
-import { BigFooter } from "@/components/BigFooter";
+import { About } from "@/components/About";
+import { Footer } from "@/components/Footer";
 import { SmoothScroll } from "@/components/SmoothScroll";
 
 export function Home() {
   return (
-    <main className="relative min-h-screen overflow-x-hidden bg-background text-foreground">
+    <main className="relative min-h-screen overflow-x-hidden bg-background font-sans text-white">
       <SmoothScroll />
       <Nav />
       <Hero />
-      <About />
-      <Skills />
+
+      <TechStack />
       <Projects />
       <Hackathons />
-      <Certifications />
-      <LearningJourney />
-      <Contact />
-      <BigFooter />
+      <About />
+      <Footer />
     </main>
   );
 }

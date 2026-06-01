@@ -1,137 +1,126 @@
 import { motion } from "framer-motion";
-import { Section } from "./Section";
-import lumen from "@/assets/omnifood.png";
-import signal from "@/assets/project1.png";
+import { ArrowUpRight, Github } from "lucide-react";
+import { projects } from "@/lib/portfolio-data";
+import { ease } from "@/lib/motion";
 
-const projects = [
-  {
-    n: "01",
-    title: "Women's Safety Analytics Platform",
-    kind: "Machine Learning • NLP",
-    year: "2026",
-    desc: "A premium case study designed to surface meaningful safety insights from real-world conversations.",
-    problem:
-      "How might we make women's safety discussions more visible through data-driven storytelling?",
-    dataset:
-      "Public safety reports, discussion feeds, and annotated text corpora for NLP analysis.",
-    approach:
-      "Built an end-to-end analytics pipeline that combines preprocessing, feature engineering, and model-driven visualization.",
-    model: "Random Forest and SVM classification with TextBlob sentiment and keyword extraction.",
-    results:
-      "Delivered a clear analytics dashboard with safety patterns, sentiment trends, and actionable insights.",
-    visuals: ["Dashboard analytics", "Text frequency maps", "Model confidence views"],
-    tech: ["Python", "Pandas", "NumPy", "Scikit-Learn", "Flask", "TextBlob"],
-    image: signal,
-  },
-  {
-    n: "02",
-    title: "OmniFood",
-    kind: "Frontend Engineering",
-    year: "2025",
-    desc: "A responsive editorial landing experience built for a premium food service with strong mobile-first polish.",
-    problem: "Craft a fast, accessible interface for a modern food subscription concept.",
-    approach:
-      "Designed the experience with mobile-first workflows, semantic HTML, and a clean visual hierarchy.",
-    model: "Flexible layout system using CSS Grid, Flexbox, and accessible component structure.",
-    results:
-      "Delivered polished desktop and mobile touchpoints with clear product storytelling and interaction rhythm.",
-    visuals: ["Desktop mockup", "Mobile layout", "Tablet refinement"],
-    tech: ["HTML5", "CSS3", "Flexbox", "CSS Grid"],
-    image: lumen,
-  },
-];
+type Project = (typeof projects)[number];
+
+function ProjectCard({ project, index }: { project: Project; index: number }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 28 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-8% 0px" }}
+      transition={{ duration: 0.65, delay: index * 0.08, ease }}
+      className="card-border group flex flex-col overflow-hidden rounded-2xl bg-[#0d0f1a] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_40px_rgba(0,0,0,0.6)]"
+    >
+      {/* ── Image area ── */}
+      <div className="relative h-52 w-full overflow-hidden sm:h-60 lg:h-64">
+        <img
+          src={project.image}
+          alt={project.title}
+          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+        />
+
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0d0f1a]/70 via-transparent to-transparent" />
+
+        {/* Number badge — top-left */}
+        <div className="absolute left-3 top-3 flex size-7 items-center justify-center rounded-full bg-black/60 text-[11px] font-bold text-white backdrop-blur-sm">
+          {project.id}
+        </div>
+
+        {/* Category badge — top-right */}
+        <div className="absolute right-3 top-3 rounded bg-black/60 px-2.5 py-1 text-[9px] font-bold uppercase tracking-widest text-white backdrop-blur-sm">
+          {project.kind.split("•")[0].trim()}
+        </div>
+      </div>
+
+      {/* ── Content ── */}
+      <div className="flex flex-1 flex-col justify-between p-5">
+        <div>
+          <h3 className="text-[17px] font-bold leading-snug text-white">
+            {project.title}
+          </h3>
+          <p className="mt-2 text-[13px] leading-relaxed text-white/50">
+            {project.desc}
+          </p>
+        </div>
+
+        {/* Bottom row: icon buttons */}
+        <div className="mt-5 flex items-center justify-end gap-2.5">
+          {project.live ? (
+            <a
+              href={project.live}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="View live demo"
+              className="inline-flex size-8 cursor-pointer items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] text-white/50 transition-all duration-200 hover:border-[rgba(255,255,255,0.25)] hover:text-white"
+            >
+              <ArrowUpRight className="size-[15px]" strokeWidth={1.8} />
+            </a>
+          ) : (
+            <span className="inline-flex size-8 items-center justify-center rounded-lg border border-white/5 text-white/20">
+              <ArrowUpRight className="size-[15px]" strokeWidth={1.8} />
+            </span>
+          )}
+          {project.github ? (
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="View source code"
+              className="inline-flex size-8 cursor-pointer items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] text-white/50 transition-all duration-200 hover:border-[rgba(255,255,255,0.25)] hover:text-white"
+            >
+              <Github className="size-[14px]" strokeWidth={1.8} />
+            </a>
+          ) : (
+            <span className="inline-flex size-8 items-center justify-center rounded-lg border border-white/5 text-white/20">
+              <Github className="size-[14px]" strokeWidth={1.8} />
+            </span>
+          )}
+        </div>
+      </div>
+    </motion.div>
+  );
+}
 
 export function Projects() {
   return (
-    <Section
-      id="projects"
-      index="04"
-      label="Featured Work"
-      title={<>Featured work with editorial focus.</>}
-    >
-      <div className="space-y-32">
-        {projects.map((p, i) => (
-          <motion.article
-            key={p.n}
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-10% 0px" }}
-            transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
-            className="group"
-            data-cursor={p.n === "01" ? "view" : "hover"}
+    <section id="projects" className="relative bg-black py-24 md:py-32">
+      <div className="container-page">
+        {/* ── Header row ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-10% 0px" }}
+          transition={{ duration: 0.7, ease }}
+          className="mb-10 flex items-end justify-between"
+        >
+          {/* Title — italic serif style matching screenshot */}
+          <h2 className="font-serif text-[clamp(1.6rem,4vw,2.4rem)] font-bold italic leading-none text-white">
+            featured projects
+          </h2>
+
+          {/* "view more" link */}
+          <a
+            href="https://github.com/adityaladdu"
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center gap-1.5 text-[13px] text-white/50 transition-colors duration-200 hover:text-white"
           >
-            <div className="mb-8 flex items-baseline justify-between text-[11px] uppercase tracking-[0.4em] text-muted-foreground">
-              <span>{p.n}</span>
-              <span>{p.year}</span>
-            </div>
+            view more
+            <ArrowUpRight className="size-4" strokeWidth={1.5} />
+          </a>
+        </motion.div>
 
-            <div className="relative overflow-hidden rounded-4xl bg-surface shadow-[0_40px_120px_-50px_rgba(0,0,0,0.65)] max-h-[35vh] md:max-h-[50vh]">
-              <img
-                src={p.image}
-                alt={`${p.title} — ${p.kind}`}
-                loading="lazy"
-                width={1600}
-                height={1000}
-                className="w-full aspect-[21/9] object-cover transition-transform duration-1600 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.02]"
-              />
-              <div className="absolute inset-0 bg-linear-to-t from-background/30 via-transparent to-transparent pointer-events-none" />
-            </div>
-
-            <div className="mt-12 grid gap-10 md:grid-cols-[1.35fr_0.85fr]">
-              <div className="space-y-6">
-                <p className="text-base leading-relaxed text-muted-foreground md:text-lg">
-                  {p.desc}
-                </p>
-                <div className="grid gap-4 sm:grid-cols-2">
-                  {[
-                    { label: "Problem", value: p.problem },
-                    { label: "Dataset", value: p.dataset },
-                    { label: "Approach", value: p.approach },
-                    { label: "Model", value: p.model },
-                  ].map((item) => (
-                    <div
-                      key={item.label}
-                      className="rounded-3xl border border-foreground/10 bg-background/80 p-6"
-                    >
-                      <p className="text-[11px] uppercase tracking-[0.35em] text-muted-foreground">
-                        {item.label}
-                      </p>
-                      <p className="mt-4 text-sm leading-7 text-foreground/90">{item.value}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="rounded-4xl border border-foreground/10 bg-surface p-8 text-sm text-muted-foreground">
-                <p className="text-[11px] uppercase tracking-[0.35em] text-muted-foreground">
-                  Results
-                </p>
-                <p className="mt-4 text-foreground/90">{p.results}</p>
-                <div className="mt-8 space-y-3">
-                  {p.visuals.map((item) => (
-                    <div key={item} className="flex items-center gap-3">
-                      <span className="grid aspect-square h-3 w-3 shrink-0 rounded-full bg-accent" />
-                      <span>{item}</span>
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-8 flex flex-wrap gap-3">
-                  {p.tech.map((item) => (
-                    <span
-                      key={item}
-                      className="rounded-full border border-foreground/10 px-4 py-2 text-[11px] uppercase tracking-[0.34em] text-muted-foreground"
-                    >
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {i < projects.length - 1 && <div className="hairline mt-24 md:mt-40" />}
-          </motion.article>
-        ))}
+        {/* ── 2-column grid ── */}
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+          {projects.map((project, i) => (
+            <ProjectCard key={project.id} project={project} index={i} />
+          ))}
+        </div>
       </div>
-    </Section>
+    </section>
   );
 }

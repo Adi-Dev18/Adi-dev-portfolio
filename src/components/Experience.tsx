@@ -30,6 +30,7 @@ export function Experience() {
       index="05"
       label="Experience"
       title={<>Creative & Technical Experience.</>}
+    >
       <div className="space-y-px overflow-hidden border-y border-border bg-border">
         {items.map((it, i) => (
           <motion.div
@@ -47,9 +48,7 @@ export function Experience() {
               </p>
             </div>
             <div className="md:col-span-5">
-              <h3 className="text-display text-2xl font-medium md:text-3xl">
-                {it.role}
-              </h3>
+              <h3 className="text-display text-2xl font-medium md:text-3xl">{it.role}</h3>
               <p className="mt-2 text-sm text-muted-foreground">{it.org}</p>
             </div>
             <div className="md:col-span-4 md:col-start-9">

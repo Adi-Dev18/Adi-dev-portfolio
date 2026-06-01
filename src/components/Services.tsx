@@ -65,9 +65,7 @@ export function Services() {
                 —
               </span>
             </div>
-            <h3 className="text-display mt-10 text-3xl font-medium md:text-4xl">
-              {s.title}
-            </h3>
+            <h3 className="text-display mt-10 text-3xl font-medium md:text-4xl">{s.title}</h3>
             <p className="mt-6 max-w-md text-base leading-relaxed text-muted-foreground">
               {s.desc}
             </p>

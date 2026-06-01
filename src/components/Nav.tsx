@@ -1,54 +1,64 @@
 import { motion, useScroll, useSpring } from "framer-motion";
+import { ease } from "@/lib/motion";
+import logo from "@/assets/logo.png";
+
+const links = [
+  ["Innovation", "innovation"],
+  ["Stack", "stack"],
+  ["Work", "projects"],
+  ["Hackathons", "hackathons"],
+  ["About", "about"],
+] as const;
 
 export function Nav() {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.3 });
 
   return (
-    <>
-      <motion.header
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 0.1, ease: [0.65, 0, 0.35, 1] }}
-        className="fixed inset-x-0 top-0 z-50 bg-background/45 backdrop-blur-xl"
-      >
-        <div className="container-page grid grid-cols-[1fr_auto_1fr] items-center py-6">
-          <a
-            href="#"
-            className="text-[11px] uppercase tracking-[0.38em] text-foreground"
-            data-cursor="hover"
-          >
-            ADITYA
-          </a>
-          <nav className="hidden gap-10 text-[11px] uppercase tracking-[0.34em] text-muted-foreground md:flex">
-            {[
-              ["About", "about"],
-              ["Skills", "skills"],
-              ["Work", "projects"],
-              ["Journey", "learning-journey"],
-              ["Contact", "contact"],
-            ].map(([label, id]) => (
-              <a
-                key={id}
-                href={`#${id}`}
-                data-cursor="hover"
-                className="magnetic-underline transition-colors hover:text-foreground"
-              >
-                {label}
-              </a>
-            ))}
-          </nav>
-          <a
-            href="#contact"
-            data-cursor="hover"
-            className="magnetic-underline justify-self-end text-[11px] uppercase tracking-[0.34em] text-foreground"
-          >
-            <span className="mr-3 inline-block size-1.5 rounded-full bg-accent align-middle shadow-[0_0_16px_rgba(255,106,43,0.9)]" />
-            Available
-          </a>
-        </div>
-        <motion.div style={{ scaleX }} className="h-px origin-left bg-foreground/20" />
-      </motion.header>
-    </>
+    <motion.header
+      initial={{ opacity: 0, y: -12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1, delay: 2.4, ease }}
+      className="fixed inset-x-0 top-0 z-50 bg-background/70 backdrop-blur-md"
+    >
+      <div className="container-page grid grid-cols-[1fr_auto_1fr] items-center py-5 md:py-6">
+        {/* Logo / Name */}
+        <a
+          href="#"
+          className="flex items-center gap-2 transition-opacity hover:opacity-70"
+        >
+          <img src={logo} alt="Aditya" className="h-6 w-6" />
+          <span className="text-[0.75rem] tracking-[0.4em] text-white/75">Aditya</span>
+        </a>
+
+        {/* Nav links */}
+        <nav className="flex items-center gap-7 md:gap-10">
+          {links.map(([label, id]) => (
+            <a
+              key={id}
+              href={`#${id}`}
+              className="magnetic-underline text-sm tracking-wide transition-colors hover:text-foreground"
+            >
+              {label}
+            </a>
+          ))}
+        </nav>
+
+        {/* Available dot */}
+        <a
+          href="#footer"
+          className="flex items-center justify-end gap-2 text-[0.75rem] tracking-[0.3em] text-white/75 transition-opacity hover:opacity-70"
+        >
+          <span className="inline-block size-1.5 rounded-full bg-green-400/80" />
+          Available
+        </a>
+      </div>
+
+      {/* Scroll progress bar */}
+      <motion.div
+        style={{ scaleX, background: "rgba(255, 255, 255, 0.14)" }}
+        className="absolute bottom-0 left-0 right-0 h-px origin-left"
+      />
+    </motion.header>
   );
 }
