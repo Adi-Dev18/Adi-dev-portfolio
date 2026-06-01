@@ -232,14 +232,14 @@ export function Hackathons() {
                 <p className="text-[11px] uppercase tracking-[0.4em] text-muted-foreground transition-colors duration-300 group-hover:text-foreground">
                   {item.eyebrow}
                 </p>
-                <h3 className="text-display mt-5 text-3xl font-medium leading-tight transition-colors duration-300 md:text-[2.75rem]">
+                <h3 className="text-display mt-5 font-medium leading-tight transition-colors duration-300 text-[clamp(2rem,8vw,3rem)] md:text-[2.75rem]">
                   {item.title}
                 </h3>
                 <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
                   {item.desc}
                 </p>
                 <span className="mt-6 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.34em] text-muted-foreground transition-colors duration-300 group-hover:text-foreground">
-                  View proof
+                  View
                   <ArrowUpRight className="size-3.5" strokeWidth={1.5} />
                 </span>
               </motion.button>
@@ -288,7 +288,7 @@ export function Hackathons() {
                   {item.title}
                 </h4>
                 <span className="mt-6 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.34em] text-muted-foreground transition-colors duration-300 group-hover:text-foreground">
-                  Preview certificate
+                  View
                   <ArrowUpRight className="size-3.5" strokeWidth={1.5} />
                 </span>
               </motion.button>

@@ -73,7 +73,7 @@ export const projects = [
       "Delivered polished desktop and mobile touchpoints with clear product storytelling and interaction rhythm.",
     tech: ["HTML5", "CSS3", "Flexbox", "CSS Grid"],
     image: omnifood,
-    github: undefined as string | undefined,
+    github: "https://github.com/adityaladdu/OmniFood",
     live: "https://adityasharma18.netlify.app/",
   },
 ];

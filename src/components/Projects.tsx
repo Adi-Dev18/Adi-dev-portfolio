@@ -1,18 +1,20 @@
-import { motion } from "framer-motion";
-import { ArrowUpRight, Github } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowUpRight, Github, X } from "lucide-react";
 import { projects } from "@/lib/portfolio-data";
 import { ease } from "@/lib/motion";
+import { useState, useEffect } from "react";
 
 type Project = (typeof projects)[number];
 
-function ProjectCard({ project, index }: { project: Project; index: number }) {
+function ProjectCard({ project, index, onClick }: { project: Project; index: number; onClick: () => void }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 28 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-8% 0px" }}
       transition={{ duration: 0.65, delay: index * 0.08, ease }}
-      className="card-border group flex flex-col overflow-hidden rounded-2xl bg-[#0d0f1a] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_40px_rgba(0,0,0,0.6)]"
+      className="card-border group flex flex-col overflow-hidden rounded-2xl bg-[#0d0f1a] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_40px_rgba(0,0,0,0.6)] cursor-pointer"
+      onClick={onClick}
     >
       {/* ── Image area ── */}
       <div className="relative h-52 w-full overflow-hidden sm:h-60 lg:h-64">
@@ -56,6 +58,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               rel="noreferrer"
               aria-label="View live demo"
               className="inline-flex size-8 cursor-pointer items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] text-white/50 transition-all duration-200 hover:border-[rgba(255,255,255,0.25)] hover:text-white"
+              onClick={(e) => e.stopPropagation()}
             >
               <ArrowUpRight className="size-[15px]" strokeWidth={1.8} />
             </a>
@@ -71,6 +74,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               rel="noreferrer"
               aria-label="View source code"
               className="inline-flex size-8 cursor-pointer items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] text-white/50 transition-all duration-200 hover:border-[rgba(255,255,255,0.25)] hover:text-white"
+              onClick={(e) => e.stopPropagation()}
             >
               <Github className="size-[14px]" strokeWidth={1.8} />
             </a>
@@ -85,7 +89,167 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   );
 }
 
+function ProjectModal({ project, onClose }: { project: Project | null; onClose: () => void }) {
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", handleEscape);
+    return () => window.removeEventListener("keydown", handleEscape);
+  }, [onClose]);
+
+  if (!project) return null;
+
+  return (
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.3 }}
+        className="fixed inset-0 z-[60] bg-black/80 backdrop-blur-sm"
+        onClick={onClose}
+      >
+        <motion.div
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.98 }}
+          transition={{ duration: 0.3, ease }}
+          className="fixed inset-4 md:inset-8 lg:inset-12 overflow-hidden card-border rounded-2xl bg-[#0d0f1a]"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* Close button */}
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close project details"
+            className="absolute right-4 top-4 z-10 flex size-10 items-center justify-center rounded-full bg-black/60 text-white/90 transition-colors hover:bg-black/80 hover:text-white"
+          >
+            <X className="size-5" strokeWidth={2} />
+          </button>
+
+          {/* Scrollable content */}
+          <div className="h-full overflow-y-auto">
+            {/* Large image */}
+            <div className="relative h-64 w-full sm:h-80 md:h-96">
+              <img
+                src={project.image}
+                alt={project.title}
+                className="h-full w-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0d0f1a] to-transparent" />
+            </div>
+
+            {/* Content */}
+            <div className="p-6 md:p-10">
+              <div className="mb-8">
+                <p className="text-[11px] uppercase tracking-[0.4em] text-white/50">
+                  {project.kind}
+                </p>
+                <h2 className="mt-4 text-[clamp(1.8rem,4vw,2.8rem)] font-bold leading-tight text-white">
+                  {project.title}
+                </h2>
+                <p className="mt-4 text-lg leading-relaxed text-white/70">
+                  {project.desc}
+                </p>
+              </div>
+
+              <div className="space-y-8">
+                {/* Problem */}
+                <div>
+                  <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-white/90">
+                    Problem
+                  </h3>
+                  <p className="text-base leading-relaxed text-white/60">
+                    {project.problem}
+                  </p>
+                </div>
+
+                {/* Approach */}
+                <div>
+                  <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-white/90">
+                    Approach
+                  </h3>
+                  <p className="text-base leading-relaxed text-white/60">
+                    {project.approach}
+                  </p>
+                </div>
+
+                {/* Results */}
+                <div>
+                  <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-white/90">
+                    Results
+                  </h3>
+                  <p className="text-base leading-relaxed text-white/60">
+                    {project.results}
+                  </p>
+                </div>
+
+                {/* Tech Stack */}
+                <div>
+                  <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-white/90">
+                    Tech Stack
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {project.tech.map((tech) => (
+                      <span
+                        key={tech}
+                        className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-sm text-white/70"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Action buttons */}
+              <div className="mt-10 flex flex-wrap gap-4">
+                {project.live && (
+                  <a
+                    href={project.live}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-white/10 px-6 py-3 text-sm font-medium text-white transition-all hover:border-white/40 hover:bg-white/15"
+                  >
+                    Live Demo
+                    <ArrowUpRight className="size-4" strokeWidth={1.5} />
+                  </a>
+                )}
+                {project.github && (
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-white/10 px-6 py-3 text-sm font-medium text-white transition-all hover:border-white/40 hover:bg-white/15"
+                  >
+                    GitHub
+                    <Github className="size-4" strokeWidth={1.5} />
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
+  );
+}
+
 export function Projects() {
+  const [activeProject, setActiveProject] = useState<Project | null>(null);
+
+  useEffect(() => {
+    if (activeProject) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [activeProject]);
+
   return (
     <section id="projects" className="relative bg-black py-24 md:py-32">
       <div className="container-page">
@@ -117,10 +281,18 @@ export function Projects() {
         {/* ── 2-column grid ── */}
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
           {projects.map((project, i) => (
-            <ProjectCard key={project.id} project={project} index={i} />
+            <ProjectCard
+              key={project.id}
+              project={project}
+              index={i}
+              onClick={() => setActiveProject(project)}
+            />
           ))}
         </div>
       </div>
+
+      {/* Project Modal */}
+      <ProjectModal project={activeProject} onClose={() => setActiveProject(null)} />
     </section>
   );
 }
