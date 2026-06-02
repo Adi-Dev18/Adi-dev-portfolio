@@ -82,7 +82,11 @@ export function InnovationCanvas() {
             <div
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
-              className="card-border relative min-w-[780px] md:min-w-0 h-[580px] w-full bg-black rounded-sm overflow-hidden [background-image:radial-gradient(rgba(255,255,255,0.06)_1px,transparent_1px)] [background-size:24px_24px] group/canvas transition-all duration-300"
+              className="relative min-w-[780px] md:min-w-0 h-[580px] w-full bg-black rounded-lg overflow-hidden [background-image:radial-gradient(rgba(255,255,255,0.06)_1px,transparent_1px)] [background-size:24px_24px] group/canvas transition-all duration-300"
+              style={{
+                borderColor: "rgba(255,255,255,0.14)",
+                borderWidth: "1px",
+              }}
             >
               {/* Flowing Connected SVG Paths */}
               <svg className="absolute inset-0 pointer-events-none size-full z-0">
@@ -152,8 +156,10 @@ export function InnovationCanvas() {
                     ? `translate(${mouse.x * 15}px, ${mouse.y * 15}px)`
                     : "translate(0px, 0px)",
                   transition: "transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)",
+                  borderColor: "rgba(255,255,255,0.20)",
+                  borderWidth: "1px",
                 }}
-                className="z-10 w-full max-w-[200px] border border-dashed border-white/20 bg-black/60 p-4 rounded-sm transition-all duration-300 hover:border-[rgba(255,255,255,0.25)] hover:scale-[1.015]"
+                className="z-10 w-full max-w-[200px] border-dashed bg-black/60 p-4 rounded-lg transition-all duration-300 hover:border-[rgba(255,255,255,0.25)] hover:scale-[1.015]"
               >
                 <div className="flex items-center gap-2 text-white/50">
                   <Search className="size-3.5" strokeWidth={1.5} />
@@ -175,8 +181,10 @@ export function InnovationCanvas() {
                     ? `translate(${mouse.x * 8}px, ${mouse.y * 8}px)`
                     : "translate(0px, 0px)",
                   transition: "transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)",
+                  borderColor: "rgba(255,255,255,0.14)",
+                  borderWidth: "1px",
                 }}
-                className="z-10 w-full max-w-[220px] border border-white/10 bg-transparent p-4 rounded-sm transition-all duration-300 hover:border-[rgba(255,255,255,0.25)] hover:bg-[rgba(255,255,255,0.01)] hover:scale-[1.015]"
+                className="z-10 w-full max-w-[220px] bg-transparent p-4 rounded-lg transition-all duration-300 hover:border-[rgba(255,255,255,0.25)] hover:bg-[rgba(255,255,255,0.01)] hover:scale-[1.015]"
               >
                 <div className="flex items-center justify-between text-white/50">
                   <div className="flex items-center gap-1.5">
@@ -191,7 +199,14 @@ export function InnovationCanvas() {
                 </p>
                 <div className="mt-3 flex items-center justify-between text-[9px]">
                   <span className="text-white/40">Sprint backlog</span>
-                  <span className="rounded-sm border border-white/5 bg-white/[0.04] px-1.5 py-0.5 text-white/60 uppercase">
+                  <span
+                    className="rounded-lg border px-1.5 py-0.5 text-white font-medium uppercase"
+                    style={{
+                      borderColor: "rgba(255,255,255,0.14)",
+                      backgroundColor: "rgba(255,255,255,0.04)",
+                      color: "rgba(255,255,255,0.7)",
+                    }}
+                  >
                     High Priority
                   </span>
                 </div>
@@ -208,9 +223,11 @@ export function InnovationCanvas() {
                     : "translate(0px, 0px)",
                   transition: "transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)",
                   boxShadow: toggleActive ? "0 0 20px rgba(255, 255, 255, 0.05)" : "none",
+                  borderColor: toggleActive ? "rgba(255,255,255,0.25)" : "rgba(255,255,255,0.14)",
+                  borderWidth: "1px",
                 }}
-                className={`z-10 w-full max-w-[210px] border p-4 rounded-sm transition-all duration-300 ${
-                  toggleActive ? "border-[rgba(255,255,255,0.25)] bg-[rgba(255,255,255,0.02)]" : "border-white/10 bg-transparent"
+                className={`z-10 w-full max-w-[210px] p-4 rounded-lg transition-all duration-300 ${
+                  toggleActive ? "bg-[rgba(255,255,255,0.02)]" : "bg-transparent"
                 }`}
               >
                 <div className="flex items-center justify-between text-white/50">
@@ -243,7 +260,12 @@ export function InnovationCanvas() {
                   </button>
                 </div>
 
-                <div className="mt-4 border-t border-white/5 pt-3 flex items-center gap-2">
+                <div
+                  className="mt-4 border-t pt-3 flex items-center gap-2"
+                  style={{
+                    borderColor: "rgba(255,255,255,0.05)",
+                  }}
+                >
                   <Lightbulb
                     className={`size-3.5 transition-colors duration-300 ${
                       toggleActive
@@ -268,8 +290,10 @@ export function InnovationCanvas() {
                     ? `translate(${mouse.x * 12}px, ${mouse.y * 12}px)`
                     : "translate(0px, 0px)",
                   transition: "transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)",
+                  borderColor: "rgba(255,255,255,0.14)",
+                  borderWidth: "1px",
                 }}
-                className="z-10 w-full max-w-[240px] border border-white/10 bg-[#111111]/90 p-4 rounded-sm transition-all duration-300 hover:border-white/30 hover:scale-[1.015]"
+                className="z-10 w-full max-w-[240px] bg-[#111111]/90 p-4 rounded-lg transition-all duration-300 hover:border-[rgba(255,255,255,0.30)] hover:scale-[1.015]"
               >
                 <div className="flex items-center gap-1.5 text-white/50">
                   <Bot className="size-3.5" strokeWidth={1.5} />
@@ -278,12 +302,23 @@ export function InnovationCanvas() {
                 <h4 className="mt-3 text-xs font-semibold text-white">Cache Router Pipeline</h4>
 
                 {/* Visual model node representation */}
-                <div className="mt-3 flex items-center gap-1 bg-black/60 border border-white/5 p-2 rounded-xs text-[9px] text-white/60">
+                <div
+                  className="mt-3 flex items-center gap-1 bg-black/60 p-2 rounded-lg text-[9px] text-white/60"
+                  style={{
+                    borderColor: "rgba(255,255,255,0.05)",
+                    borderWidth: "1px",
+                  }}
+                >
                   <span>Input</span>
                   <span className="text-white/30">→</span>
                   <span className="text-white">LLM Router</span>
                   <span className="text-white/30">→</span>
-                  <span className="rounded-sm bg-white/10 px-1 text-white font-medium">
+                  <span
+                    className="rounded-lg px-1 font-medium text-white"
+                    style={{
+                      backgroundColor: "rgba(255,255,255,0.10)",
+                    }}
+                  >
                     Claude 3.5
                   </span>
                 </div>
@@ -304,8 +339,10 @@ export function InnovationCanvas() {
                     ? `translate(${mouse.x * -10}px, ${mouse.y * -10}px)`
                     : "translate(0px, 0px)",
                   transition: "transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)",
+                  borderColor: "rgba(255,255,255,0.14)",
+                  borderWidth: "1px",
                 }}
-                className="z-10 w-full max-w-[200px] border border-white/10 bg-transparent p-4 rounded-sm transition-all duration-300 hover:border-[rgba(255,255,255,0.25)] hover:bg-[rgba(255,255,255,0.01)] hover:scale-[1.015]"
+                className="z-10 w-full max-w-[200px] bg-transparent p-4 rounded-lg transition-all duration-300 hover:border-[rgba(255,255,255,0.25)] hover:bg-[rgba(255,255,255,0.01)] hover:scale-[1.015]"
               >
                 <div className="flex items-center gap-1.5 text-white/50">
                   <BarChart3 className="size-3.5" strokeWidth={1.5} />
@@ -322,7 +359,12 @@ export function InnovationCanvas() {
                 <p className="mt-1.5 text-[9px] text-white/50">Server response latency</p>
 
                 {/* Pulsing loading bar */}
-                <div className="mt-3 h-1 w-full bg-white/5 overflow-hidden rounded-full">
+                <div
+                  className="mt-3 h-1 w-full overflow-hidden rounded-full"
+                  style={{
+                    backgroundColor: "rgba(255,255,255,0.05)",
+                  }}
+                >
                   <motion.div
                     className="h-full bg-white origin-left"
                     animate={{ scaleX: [0.15, 0.85, 0.15] }}
@@ -341,8 +383,10 @@ export function InnovationCanvas() {
                     ? `translate(${mouse.x * 18}px, ${mouse.y * 18}px)`
                     : "translate(0px, 0px)",
                   transition: "transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)",
+                  borderColor: "rgba(255,255,255,0.14)",
+                  borderWidth: "1px",
                 }}
-                className="z-10 w-full max-w-[230px] border border-white/10 bg-transparent p-4 rounded-sm transition-all duration-300 hover:border-[rgba(255,255,255,0.25)] hover:bg-[rgba(255,255,255,0.01)] hover:scale-[1.015]"
+                className="z-10 w-full max-w-[230px] bg-transparent p-4 rounded-lg transition-all duration-300 hover:border-[rgba(255,255,255,0.25)] hover:bg-[rgba(255,255,255,0.01)] hover:scale-[1.015]"
               >
                 <div className="flex items-center gap-1.5 text-white/50">
                   <MessageSquare className="size-3.5" strokeWidth={1.5} />

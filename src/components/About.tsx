@@ -83,9 +83,21 @@ export function About() {
                     key={feat.title}
                     variants={fadeUp}
                     transition={{ duration: 0.8, delay: index * 0.05, ease }}
-                    className="card-border flex gap-4 items-start p-4 rounded-sm bg-white/[0.01]"
+                    className="flex gap-4 items-start p-4 rounded-lg"
+                    style={{
+                      borderColor: "rgba(255,255,255,0.14)",
+                      borderWidth: "1px",
+                      backgroundColor: "rgba(255,255,255,0.01)",
+                    }}
                   >
-                    <div className="flex size-10 shrink-0 items-center justify-center rounded-sm border border-white/10 bg-white/[0.02] text-white/70" style={{ borderColor: "rgba(255,255,255,0.14)" }}>
+                    <div
+                      className="flex size-10 shrink-0 items-center justify-center rounded-lg text-white/70"
+                      style={{
+                        borderColor: "rgba(255,255,255,0.14)",
+                        borderWidth: "1px",
+                        backgroundColor: "rgba(255,255,255,0.02)",
+                      }}
+                    >
                       <Icon className="size-5" strokeWidth={1.5} />
                     </div>
                     <div>
@@ -101,21 +113,35 @@ export function About() {
             <motion.div
               variants={fadeUp}
               transition={{ duration: 0.8, ease }}
-              className="mt-10 grid grid-cols-3 card-border rounded-sm bg-surface p-5 gap-4"
+              className="mt-10 grid grid-cols-3 rounded-lg gap-4 p-5"
+              style={{
+                borderColor: "rgba(255,255,255,0.14)",
+                borderWidth: "1px",
+                backgroundColor: "rgba(255,255,255,0.01)",
+              }}
             >
-              <div className="relative pl-4 border-r last:border-none" style={{ borderColor: "rgba(255,255,255,0.08)" }}>
+              <div
+                className="relative pl-4 border-r last:border-none"
+                style={{ borderColor: "rgba(255,255,255,0.08)" }}
+              >
                 <span className="absolute left-0 top-1.5 size-1.5 rounded-full bg-[#f97316]" />
                 <h4 className="font-display text-2xl font-bold text-white md:text-3xl">5+</h4>
                 <p className="mt-1 text-[10px] uppercase tracking-wider text-white/50">Projects</p>
               </div>
-              <div className="relative pl-4 border-r last:border-none" style={{ borderColor: "rgba(255,255,255,0.08)" }}>
+              <div
+                className="relative pl-4 border-r last:border-none"
+                style={{ borderColor: "rgba(255,255,255,0.08)" }}
+              >
                 <span className="absolute left-0 top-1.5 size-1.5 rounded-full bg-[#f97316]" />
                 <h4 className="font-display text-2xl font-bold text-white md:text-3xl">10+</h4>
                 <p className="mt-1 text-[10px] uppercase tracking-wider text-white/50">
                   Technologies
                 </p>
               </div>
-              <div className="relative pl-4 border-r last:border-none" style={{ borderColor: "rgba(255,255,255,0.08)" }}>
+              <div
+                className="relative pl-4 border-r last:border-none"
+                style={{ borderColor: "rgba(255,255,255,0.08)" }}
+              >
                 <span className="absolute left-0 top-1.5 size-1.5 rounded-full bg-[#f97316]" />
                 <h4 className="font-display text-2xl font-bold text-white md:text-3xl">∞</h4>
                 <p className="mt-1 text-[10px] uppercase tracking-wider text-white/50">Learning</p>

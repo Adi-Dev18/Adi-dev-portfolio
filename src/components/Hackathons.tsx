@@ -100,7 +100,17 @@ function GalleryModal({ active, onClose }: { active: GalleryItem | null; onClose
                       type="button"
                       onClick={controls.previous}
                       aria-label="Previous image"
-                      className="absolute left-4 top-1/2 inline-flex size-11 -translate-y-1/2 cursor-pointer items-center justify-center rounded-sm border border-white/20 bg-black/55 text-white backdrop-blur transition-all duration-300 hover:border-[rgba(255,255,255,0.25)]"
+                      className="absolute left-4 top-1/2 inline-flex size-11 -translate-y-1/2 cursor-pointer items-center justify-center rounded-sm bg-black/55 text-white backdrop-blur transition-all duration-300"
+                      style={{
+                        borderColor: "rgba(255,255,255,0.20)",
+                        borderWidth: "1px",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.borderColor = "rgba(255,255,255,0.25)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.borderColor = "rgba(255,255,255,0.20)";
+                      }}
                     >
                       <ChevronLeft className="size-5" strokeWidth={1.5} />
                     </button>
@@ -108,7 +118,17 @@ function GalleryModal({ active, onClose }: { active: GalleryItem | null; onClose
                       type="button"
                       onClick={controls.next}
                       aria-label="Next image"
-                      className="absolute right-4 top-1/2 inline-flex size-11 -translate-y-1/2 cursor-pointer items-center justify-center rounded-sm border border-white/20 bg-black/55 text-white backdrop-blur transition-all duration-300 hover:border-white/45"
+                      className="absolute right-4 top-1/2 inline-flex size-11 -translate-y-1/2 cursor-pointer items-center justify-center rounded-sm bg-black/55 text-white backdrop-blur transition-all duration-300"
+                      style={{
+                        borderColor: "rgba(255,255,255,0.20)",
+                        borderWidth: "1px",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.borderColor = "rgba(255,255,255,0.25)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.borderColor = "rgba(255,255,255,0.20)";
+                      }}
                     >
                       <ChevronRight className="size-5" strokeWidth={1.5} />
                     </button>
@@ -129,7 +149,12 @@ function GalleryModal({ active, onClose }: { active: GalleryItem | null; onClose
 
               <p className="text-sm leading-relaxed text-muted-foreground">{active.desc}</p>
 
-              <div className="flex items-center justify-between border-y border-border py-4 text-[11px] uppercase tracking-[0.34em] text-muted-foreground">
+              <div
+                className="flex items-center justify-between border-y py-4 text-[11px] uppercase tracking-[0.34em] text-muted-foreground"
+                style={{
+                  borderColor: "rgba(255,255,255,0.14)",
+                }}
+              >
                 <span>
                   {String(index + 1).padStart(2, "0")} /{" "}
                   {String(active.images.length).padStart(2, "0")}
@@ -140,7 +165,17 @@ function GalleryModal({ active, onClose }: { active: GalleryItem | null; onClose
                       type="button"
                       onClick={controls.previous}
                       aria-label="Previous image"
-                      className="inline-flex size-9 cursor-pointer items-center justify-center rounded-sm border border-border transition-colors hover:border-[rgba(255,255,255,0.25)]"
+                      className="inline-flex size-9 cursor-pointer items-center justify-center rounded-sm transition-colors"
+                      style={{
+                        borderColor: "rgba(255,255,255,0.14)",
+                        borderWidth: "1px",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.borderColor = "rgba(255,255,255,0.25)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.borderColor = "rgba(255,255,255,0.14)";
+                      }}
                     >
                       <ChevronLeft className="size-4" strokeWidth={1.5} />
                     </button>
@@ -148,7 +183,17 @@ function GalleryModal({ active, onClose }: { active: GalleryItem | null; onClose
                       type="button"
                       onClick={controls.next}
                       aria-label="Next image"
-                      className="inline-flex size-9 cursor-pointer items-center justify-center rounded-sm border border-border transition-colors hover:border-[rgba(255,255,255,0.25)]"
+                      className="inline-flex size-9 cursor-pointer items-center justify-center rounded-sm transition-colors"
+                      style={{
+                        borderColor: "rgba(255,255,255,0.14)",
+                        borderWidth: "1px",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.borderColor = "rgba(255,255,255,0.25)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.borderColor = "rgba(255,255,255,0.14)";
+                      }}
                     >
                       <ChevronRight className="size-4" strokeWidth={1.5} />
                     </button>
@@ -163,11 +208,24 @@ function GalleryModal({ active, onClose }: { active: GalleryItem | null; onClose
                     type="button"
                     onClick={() => setIndex(imageIndex)}
                     aria-label={`Open preview ${imageIndex + 1}`}
-                    className={`aspect-[4/3] cursor-pointer overflow-hidden rounded-sm border bg-black transition-all duration-300 ${
-                      imageIndex === index
-                        ? "border-white/60"
-                        : "border-border opacity-65 hover:border-[rgba(255,255,255,0.22)] hover:opacity-100"
+                    className={`aspect-[4/3] cursor-pointer overflow-hidden rounded-sm bg-black transition-all duration-300 ${
+                      imageIndex === index ? "opacity-100" : "opacity-65 hover:opacity-100"
                     }`}
+                    style={{
+                      borderColor:
+                        imageIndex === index ? "rgba(255,255,255,0.60)" : "rgba(255,255,255,0.14)",
+                      borderWidth: "1px",
+                    }}
+                    onMouseEnter={(e) => {
+                      if (imageIndex !== index) {
+                        e.currentTarget.style.borderColor = "rgba(255,255,255,0.22)";
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (imageIndex !== index) {
+                        e.currentTarget.style.borderColor = "rgba(255,255,255,0.14)";
+                      }
+                    }}
                   >
                     <img
                       src={image}
@@ -279,7 +337,19 @@ export function Hackathons() {
                 variants={fadeUp}
                 transition={{ duration: 0.85, ease }}
                 onClick={() => setActive(item)}
-                className="card-border group cursor-pointer rounded-sm bg-transparent p-8 text-left transition-all duration-300 hover:-translate-y-1 hover:border-[rgba(255,255,255,0.25)] hover:bg-[rgba(255,255,255,0.01)] md:p-10"
+                className="group cursor-pointer rounded-sm bg-transparent p-8 text-left transition-all duration-300 hover:-translate-y-1 md:p-10"
+                style={{
+                  borderColor: "rgba(255,255,255,0.14)",
+                  borderWidth: "1px",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.25)";
+                  e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.01)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.14)";
+                  e.currentTarget.style.backgroundColor = "transparent";
+                }}
               >
                 <p className="text-[11px] uppercase tracking-[0.4em] text-muted-foreground">
                   {item.eyebrow}

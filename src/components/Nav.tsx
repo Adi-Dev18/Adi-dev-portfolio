@@ -16,6 +16,7 @@ export function Nav() {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.3 });
   const [isOpen, setIsOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
     if (isOpen) {
@@ -38,6 +39,33 @@ export function Nav() {
     return () => window.removeEventListener("keydown", handleEscape);
   }, [isOpen]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = links.map(([_, id]) => document.getElementById(id));
+      const scrollPosition = window.scrollY + 100;
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = sections[i];
+        if (section && section.offsetTop <= scrollPosition) {
+          setActiveSection(links[i][1]);
+          break;
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   return (
     <>
       <motion.header
@@ -46,7 +74,7 @@ export function Nav() {
         transition={{ duration: 1, delay: 2.4, ease }}
         className="fixed inset-x-0 top-0 z-50 bg-background/70 backdrop-blur-md"
       >
-        <div className="container-page flex items-center justify-between py-5 md:py-6 md:grid md:grid-cols-[1fr_auto_1fr]">
+        <div className="container-page flex items-center justify-between py-5 md:py-6">
           {/* Logo / Name */}
           <a
             href="#"
@@ -57,36 +85,44 @@ export function Nav() {
           </a>
 
           {/* Nav links - hidden on mobile */}
-          <nav className="hidden md:flex items-center gap-7 md:gap-10">
+          <nav className="hidden lg:flex items-center gap-7 md:gap-10">
             {links.map(([label, id]) => (
               <a
                 key={id}
                 href={`#${id}`}
-                className="magnetic-underline text-sm tracking-wide transition-colors hover:text-foreground"
+                onClick={(e) => handleSmoothScroll(e, id)}
+                className={`magnetic-underline text-sm tracking-wide transition-all duration-300 ${
+                  activeSection === id
+                    ? "text-white opacity-100"
+                    : "text-white/60 hover:text-white hover:opacity-90"
+                }`}
               >
                 {label}
               </a>
             ))}
           </nav>
 
-          {/* Mobile hamburger menu */}
-          <button
-            type="button"
-            onClick={() => setIsOpen(true)}
-            aria-label="Open navigation menu"
-            className="md:hidden ml-auto flex items-center justify-end"
-          >
-            <Menu className="size-6 text-white/90 transition-colors hover:text-white" strokeWidth={2} />
-          </button>
+          {/* Right side: Available dot (desktop) or Hamburger (mobile) */}
+          <div className="flex items-center gap-4">
+            {/* Available dot - hidden on mobile */}
+            <a
+              href="#footer"
+              className="hidden lg:flex items-center gap-2 text-[0.75rem] tracking-[0.3em] text-white/75 transition-opacity hover:opacity-70"
+            >
+              <span className="inline-block size-1.5 rounded-full bg-green-400/80" />
+              Available
+            </a>
 
-          {/* Available dot - hidden on mobile */}
-          <a
-            href="#footer"
-            className="hidden lg:flex items-center justify-end gap-2 text-[0.75rem] tracking-[0.3em] text-white/75 transition-opacity hover:opacity-70"
-          >
-            <span className="inline-block size-1.5 rounded-full bg-green-400/80" />
-            Available
-          </a>
+            {/* Mobile hamburger menu */}
+            <button
+              type="button"
+              onClick={() => setIsOpen(true)}
+              aria-label="Open navigation menu"
+              className="lg:hidden flex items-center"
+            >
+              <Menu className="size-6 text-white/90 transition-colors hover:text-white" strokeWidth={2} />
+            </button>
+          </div>
         </div>
 
         {/* Scroll progress bar */}
@@ -131,7 +167,10 @@ export function Nav() {
                   <motion.a
                     key={id}
                     href={`#${id}`}
-                    onClick={() => setIsOpen(false)}
+                    onClick={(e) => {
+                      handleSmoothScroll(e, id);
+                      setIsOpen(false);
+                    }}
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.3, delay: 0.1 }}

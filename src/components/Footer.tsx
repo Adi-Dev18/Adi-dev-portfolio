@@ -11,7 +11,11 @@ const links = [
 
 export function Footer() {
   return (
-    <footer id="footer" className="relative border-t py-16 md:py-20" style={{ borderColor: "rgba(255,255,255,0.08)" }}>
+    <footer
+      id="footer"
+      className="relative border-t py-16 md:py-20"
+      style={{ borderColor: "rgba(255,255,255,0.08)" }}
+    >
       <div className="container-page">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -23,9 +27,6 @@ export function Footer() {
           <div>
             <p className="text-sm text-muted-foreground">© 2026 Aditya</p>
             <p className="mt-3 text-base text-white">Frontend Engineer · Data Science Student</p>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Built with React &amp; Framer Motion
-            </p>
           </div>
 
           <div className="flex flex-wrap items-center gap-6 md:gap-8">

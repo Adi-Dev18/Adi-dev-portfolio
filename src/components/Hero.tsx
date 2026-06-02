@@ -90,10 +90,23 @@ export function Hero() {
               transition={{ duration: 0.8, delay: 1.8, ease }}
               whileHover={{
                 y: -2,
-                borderColor: "rgba(255, 255, 255, 0.25)",
-                backgroundColor: "rgba(255, 255, 255, 0.03)",
               }}
-              className="btn-premium inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium tracking-wide text-white"
+              className="inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-medium tracking-wide text-white transition-all duration-200"
+              style={{
+                borderColor: "rgba(255,255,255,0.14)",
+                borderWidth: "1px",
+                backgroundColor: "rgba(255,255,255,0.03)",
+              }}
+              onMouseEnter={(e) => {
+                const target = e.currentTarget as HTMLAnchorElement;
+                target.style.borderColor = "rgba(255,255,255,0.25)";
+                target.style.backgroundColor = "rgba(255,255,255,0.08)";
+              }}
+              onMouseLeave={(e) => {
+                const target = e.currentTarget as HTMLAnchorElement;
+                target.style.borderColor = "rgba(255,255,255,0.14)";
+                target.style.backgroundColor = "rgba(255,255,255,0.03)";
+              }}
             >
               <Download className="size-4" strokeWidth={1.5} />
               Resume

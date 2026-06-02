@@ -6,7 +6,15 @@ import { useState, useEffect } from "react";
 
 type Project = (typeof projects)[number];
 
-function ProjectCard({ project, index, onClick }: { project: Project; index: number; onClick: () => void }) {
+function ProjectCard({
+  project,
+  index,
+  onClick,
+}: {
+  project: Project;
+  index: number;
+  onClick: () => void;
+}) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 28 }}
@@ -41,12 +49,37 @@ function ProjectCard({ project, index, onClick }: { project: Project; index: num
       {/* ── Content ── */}
       <div className="flex flex-1 flex-col justify-between p-5">
         <div>
-          <h3 className="text-[17px] font-bold leading-snug text-white">
-            {project.title}
-          </h3>
-          <p className="mt-2 text-[13px] leading-relaxed text-white/50">
-            {project.desc}
-          </p>
+          <h3 className="text-[17px] font-bold leading-snug text-white">{project.title}</h3>
+          <p className="mt-2 text-[13px] leading-relaxed text-white/50">{project.desc}</p>
+
+          {/* ── TL;DR Info Layer ── */}
+          <div className="mt-5 space-y-3">
+            {/* Tech Stack */}
+            <div>
+              <p className="text-[10px] uppercase tracking-wider text-white/40 mb-2">Tech Stack</p>
+              <div className="flex flex-wrap gap-1.5">
+                {project.tech.slice(0, 4).map((tech) => (
+                  <span
+                    key={tech}
+                    className="inline-block rounded border border-[rgba(255,255,255,0.14)] bg-[rgba(255,255,255,0.03)] px-2 py-1 text-[11px] text-white/60"
+                  >
+                    {tech}
+                  </span>
+                ))}
+                {project.tech.length > 4 && (
+                  <span className="inline-block rounded border border-[rgba(255,255,255,0.14)] bg-[rgba(255,255,255,0.03)] px-2 py-1 text-[11px] text-white/60">
+                    +{project.tech.length - 4}
+                  </span>
+                )}
+              </div>
+            </div>
+
+            {/* Impact */}
+            <div>
+              <p className="text-[10px] uppercase tracking-wider text-white/40 mb-2">Impact</p>
+              <p className="text-[12px] leading-relaxed text-white/70">{project.results}</p>
+            </div>
+          </div>
         </div>
 
         {/* Bottom row: icon buttons */}
@@ -57,13 +90,13 @@ function ProjectCard({ project, index, onClick }: { project: Project; index: num
               target="_blank"
               rel="noreferrer"
               aria-label="View live demo"
-              className="inline-flex size-8 cursor-pointer items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] text-white/50 transition-all duration-200 hover:border-[rgba(255,255,255,0.25)] hover:text-white"
+              className="inline-flex size-8 cursor-pointer items-center justify-center rounded-lg border border-[rgba(255,255,255,0.14)] bg-white/[0.04] text-white/50 transition-all duration-200 hover:border-[rgba(255,255,255,0.25)] hover:bg-white/[0.08] hover:text-white"
               onClick={(e) => e.stopPropagation()}
             >
               <ArrowUpRight className="size-[15px]" strokeWidth={1.8} />
             </a>
           ) : (
-            <span className="inline-flex size-8 items-center justify-center rounded-lg border border-white/5 text-white/20">
+            <span className="inline-flex size-8 items-center justify-center rounded-lg border border-[rgba(255,255,255,0.08)] text-white/20">
               <ArrowUpRight className="size-[15px]" strokeWidth={1.8} />
             </span>
           )}
@@ -73,13 +106,13 @@ function ProjectCard({ project, index, onClick }: { project: Project; index: num
               target="_blank"
               rel="noreferrer"
               aria-label="View source code"
-              className="inline-flex size-8 cursor-pointer items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] text-white/50 transition-all duration-200 hover:border-[rgba(255,255,255,0.25)] hover:text-white"
+              className="inline-flex size-8 cursor-pointer items-center justify-center rounded-lg border border-[rgba(255,255,255,0.14)] bg-white/[0.04] text-white/50 transition-all duration-200 hover:border-[rgba(255,255,255,0.25)] hover:bg-white/[0.08] hover:text-white"
               onClick={(e) => e.stopPropagation()}
             >
               <Github className="size-[14px]" strokeWidth={1.8} />
             </a>
           ) : (
-            <span className="inline-flex size-8 items-center justify-center rounded-lg border border-white/5 text-white/20">
+            <span className="inline-flex size-8 items-center justify-center rounded-lg border border-[rgba(255,255,255,0.08)] text-white/20">
               <Github className="size-[14px]" strokeWidth={1.8} />
             </span>
           )}
@@ -115,7 +148,8 @@ function ProjectModal({ project, onClose }: { project: Project | null; onClose: 
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.98 }}
           transition={{ duration: 0.3, ease }}
-          className="fixed inset-4 md:inset-8 lg:inset-12 overflow-hidden card-border rounded-2xl bg-[#0d0f1a]"
+          className="fixed inset-4 md:inset-8 lg:inset-12 overflow-hidden rounded-2xl bg-[#0d0f1a]"
+          style={{ borderColor: "rgba(255,255,255,0.14)", borderWidth: "1px" }}
           onClick={(e) => e.stopPropagation()}
         >
           {/* Close button */}
@@ -132,11 +166,7 @@ function ProjectModal({ project, onClose }: { project: Project | null; onClose: 
           <div className="h-full overflow-y-auto">
             {/* Large image */}
             <div className="relative h-64 w-full sm:h-80 md:h-96">
-              <img
-                src={project.image}
-                alt={project.title}
-                className="h-full w-full object-cover"
-              />
+              <img src={project.image} alt={project.title} className="h-full w-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0d0f1a] to-transparent" />
             </div>
 
@@ -149,9 +179,7 @@ function ProjectModal({ project, onClose }: { project: Project | null; onClose: 
                 <h2 className="mt-4 text-[clamp(1.8rem,4vw,2.8rem)] font-bold leading-tight text-white">
                   {project.title}
                 </h2>
-                <p className="mt-4 text-lg leading-relaxed text-white/70">
-                  {project.desc}
-                </p>
+                <p className="mt-4 text-lg leading-relaxed text-white/70">{project.desc}</p>
               </div>
 
               <div className="space-y-8">
@@ -160,9 +188,7 @@ function ProjectModal({ project, onClose }: { project: Project | null; onClose: 
                   <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-white/90">
                     Problem
                   </h3>
-                  <p className="text-base leading-relaxed text-white/60">
-                    {project.problem}
-                  </p>
+                  <p className="text-base leading-relaxed text-white/60">{project.problem}</p>
                 </div>
 
                 {/* Approach */}
@@ -170,9 +196,7 @@ function ProjectModal({ project, onClose }: { project: Project | null; onClose: 
                   <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-white/90">
                     Approach
                   </h3>
-                  <p className="text-base leading-relaxed text-white/60">
-                    {project.approach}
-                  </p>
+                  <p className="text-base leading-relaxed text-white/60">{project.approach}</p>
                 </div>
 
                 {/* Results */}
@@ -180,9 +204,7 @@ function ProjectModal({ project, onClose }: { project: Project | null; onClose: 
                   <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-white/90">
                     Results
                   </h3>
-                  <p className="text-base leading-relaxed text-white/60">
-                    {project.results}
-                  </p>
+                  <p className="text-base leading-relaxed text-white/60">{project.results}</p>
                 </div>
 
                 {/* Tech Stack */}
@@ -194,7 +216,12 @@ function ProjectModal({ project, onClose }: { project: Project | null; onClose: 
                     {project.tech.map((tech) => (
                       <span
                         key={tech}
-                        className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-sm text-white/70"
+                        className="rounded-full px-3 py-1.5 text-sm text-white/70"
+                        style={{
+                          borderColor: "rgba(255,255,255,0.14)",
+                          borderWidth: "1px",
+                          backgroundColor: "rgba(255,255,255,0.03)",
+                        }}
                       >
                         {tech}
                       </span>
@@ -210,7 +237,20 @@ function ProjectModal({ project, onClose }: { project: Project | null; onClose: 
                     href={project.live}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-white/10 px-6 py-3 text-sm font-medium text-white transition-all hover:border-white/40 hover:bg-white/15"
+                    className="inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-medium text-white transition-all duration-200"
+                    style={{
+                      borderColor: "rgba(255,255,255,0.14)",
+                      borderWidth: "1px",
+                      backgroundColor: "rgba(255,255,255,0.03)",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderColor = "rgba(255,255,255,0.25)";
+                      e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.08)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor = "rgba(255,255,255,0.14)";
+                      e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.03)";
+                    }}
                   >
                     Live Demo
                     <ArrowUpRight className="size-4" strokeWidth={1.5} />
@@ -221,7 +261,20 @@ function ProjectModal({ project, onClose }: { project: Project | null; onClose: 
                     href={project.github}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-white/10 px-6 py-3 text-sm font-medium text-white transition-all hover:border-white/40 hover:bg-white/15"
+                    className="inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-medium text-white transition-all duration-200"
+                    style={{
+                      borderColor: "rgba(255,255,255,0.14)",
+                      borderWidth: "1px",
+                      backgroundColor: "rgba(255,255,255,0.03)",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderColor = "rgba(255,255,255,0.25)";
+                      e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.08)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor = "rgba(255,255,255,0.14)";
+                      e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.03)";
+                    }}
                   >
                     GitHub
                     <Github className="size-4" strokeWidth={1.5} />

@@ -48,7 +48,15 @@ export function Services() {
         </>
       }
     >
-      <div className="grid gap-px overflow-hidden border-y border-border bg-border md:grid-cols-2">
+      <div
+        className="grid gap-px overflow-hidden bg-[rgba(255,255,255,0.14)] md:grid-cols-2"
+        style={{
+          borderTopColor: "rgba(255,255,255,0.14)",
+          borderTopWidth: "1px",
+          borderBottomColor: "rgba(255,255,255,0.14)",
+          borderBottomWidth: "1px",
+        }}
+      >
         {services.map((s, i) => (
           <motion.div
             key={s.n}

@@ -22,7 +22,11 @@ export function Section({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-15% 0px" }}
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-16 flex items-baseline justify-between border-b border-border pb-6 md:mb-24"
+          className="mb-16 flex items-baseline justify-between pb-6 md:mb-24"
+          style={{
+            borderBottomColor: "rgba(255,255,255,0.14)",
+            borderBottomWidth: "1px",
+          }}
         >
           <div className="flex items-baseline gap-6">
             <span className="text-[11px] uppercase tracking-[0.4em] text-muted-foreground">
