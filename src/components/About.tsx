@@ -61,7 +61,7 @@ export function About() {
             <motion.div
               variants={fadeUp}
               transition={{ duration: 0.8, ease }}
-              className="mt-6 space-y-4 text-sm leading-relaxed text-muted-foreground md:text-base max-w-[560px]"
+              className="mt-6 space-y-4 text-sm leading-relaxed text-muted-foreground md:text-base max-w-140"
             >
               <p className="font-semibold text-white">Hi, I&apos;m Aditya.</p>
               <p>
@@ -157,14 +157,14 @@ export function About() {
             transition={{ duration: 0.95, ease }}
             className="order-1 lg:order-2 flex justify-center w-full"
           >
-            <div className="image-frame relative overflow-hidden rounded-sm w-full max-w-[500px] aspect-[4/5] bg-[#0d0d0d] group">
+            <div className="image-frame relative overflow-hidden rounded-sm w-full max-w-125 aspect-4/5 bg-[#0d0d0d] group">
               <img
                 src={adityaAboutNew}
                 alt="Aditya portrait"
-                className="h-full w-full object-cover grayscale brightness-90 contrast-105 transition-all duration-[800ms] ease-out group-hover:scale-[1.03] group-hover:grayscale-0 group-hover:brightness-100 group-hover:contrast-100"
+                className="h-full w-full object-cover grayscale brightness-90 contrast-105 transition-all duration-800 ease-out group-hover:scale-[1.03] group-hover:grayscale-0 group-hover:brightness-100 group-hover:contrast-100"
                 loading="lazy"
               />
-              <div className="absolute inset-0 border border-white/0 rounded-sm pointer-events-none transition-all duration-[800ms] ease-out group-hover:border-orange-500/20 group-hover:shadow-[inset_0_0_20px_rgba(249,115,22,0.15)]" />
+              <div className="absolute inset-0 border border-white/0 rounded-sm pointer-events-none transition-all duration-800 ease-out group-hover:border-orange-500/20 group-hover:shadow-[inset_0_0_20px_rgba(249,115,22,0.15)]" />
             </div>
           </motion.div>
         </div>

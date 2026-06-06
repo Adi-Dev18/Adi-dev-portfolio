@@ -7,6 +7,7 @@ import amazonQIntroduction from "@/assets/Amazon Q Introduction.png";
 import azureMachineLearning from "@/assets/Azure Machine Learning.png";
 import dataAnalysis from "@/assets/Data Analysis.png";
 import developerTools from "@/assets/Developer tools.png";
+import udemyHtmlCss from "@/assets/udemy html&css.png";
 import novus24 from "@/assets/Novus24.png";
 import technovanza from "@/assets/Technovanza.png";
 import yukthi1 from "@/assets/Yukthi 1.png";
@@ -137,5 +138,12 @@ export const certifications = [
     title: "Amazon Q Developer",
     verifyUrl: undefined as string | undefined,
     images: [amazonQDeveloper],
+  },
+  {
+    id: "udemy-html-css",
+    org: "Udemy",
+    title: "Build Responsive Real-World Websites with HTML and CSS",
+    verifyUrl: "https://ude.my/UC-8f778f93-f6e3-477d-87ec-c31bf611c344",
+    images: [udemyHtmlCss],
   },
 ];
