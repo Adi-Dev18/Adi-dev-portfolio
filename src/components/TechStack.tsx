@@ -14,14 +14,15 @@ import {
   Wind,
   Wrench,
   Zap,
+  GraduationCap,
   type LucideIcon,
 } from "lucide-react";
 import { useState } from "react";
-import { education, techStack } from "@/lib/portfolio-data";
+import { education, techStack, diploma } from "@/lib/portfolio-data";
 import { ease } from "@/lib/motion";
 import { LayoutGroup } from "framer-motion";
 
-type Tab = "stack" | "education";
+type Tab = "stack" | "education" | "diploma";
 
 /* ─── Icon map ─── */
 const iconMap: Record<string, LucideIcon> = {
@@ -130,6 +131,70 @@ function EducationCard() {
   );
 }
 
+/* ─── Diploma tab ─── */
+function DiplomaCard() {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, ease }}
+      className="space-y-12"
+    >
+      {/* Institution name */}
+      <div>
+        <h3 className="text-[clamp(2rem,4vw,2.5rem)] font-bold text-white leading-tight">
+          {diploma.institution}
+        </h3>
+      </div>
+
+      {/* Program */}
+      <div>
+        <p className="text-[clamp(1.375rem,3vw,1.625rem)] font-semibold text-white/90 leading-relaxed">
+          {diploma.program}
+        </p>
+      </div>
+
+      {/* Duration */}
+      <div>
+        <p className="text-[1rem] font-medium text-white/70">
+          {diploma.duration}
+        </p>
+      </div>
+
+      {/* Divider */}
+      <div className="h-px w-full" style={{ background: "rgba(255,255,255,0.08)" }} />
+
+      {/* Overview */}
+      <div>
+        <p className="mb-6 text-[1.375rem] font-semibold text-white/90">
+          Overview
+        </p>
+        <p className="text-[1.125rem] text-white/70 leading-relaxed">
+          {diploma.overview}
+        </p>
+      </div>
+
+      {/* Divider */}
+      <div className="h-px w-full" style={{ background: "rgba(255,255,255,0.08)" }} />
+
+      {/* Major subjects */}
+      <div>
+        <p className="mb-6 text-[1.375rem] font-semibold text-white/90">
+          Major Subjects
+        </p>
+        <ul className="space-y-4">
+          {diploma.majorSubjects.map((subject) => (
+            <li key={subject} className="flex items-center gap-4 text-[1.125rem] text-white/70 leading-relaxed">
+              <span className="size-2 flex-shrink-0 rounded-full bg-white/40" />
+              {subject}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </motion.div>
+  );
+}
+
 
 
 /* ─── Main export ─── */
@@ -157,18 +222,19 @@ export function TechStack() {
 
         {/* Tab pill switcher with sliding active indicator */}
         <LayoutGroup>
-          <div className="mb-8 inline-flex w-full max-w-sm overflow-hidden rounded-full border border-white/10 bg-[#0d0f17] p-1" style={{ borderColor: "rgba(255,255,255,0.14)" }}>
+          <div className="mb-8 inline-flex w-full max-w-md overflow-hidden rounded-full border border-white/10 bg-[#0d0f17] p-1" style={{ borderColor: "rgba(255,255,255,0.14)" }}>
             {(
               [
                 ["stack", "Tech Stack"],
                 ["education", "Education"],
+                ["diploma", "Diploma"],
               ] as const
             ).map(([key, label]) => (
               <button
                 key={key}
                 type="button"
                 onClick={() => setTab(key)}
-                className="relative flex-1 rounded-full px-6 py-2.5 text-[12px] font-semibold tracking-wide transition-all duration-300"
+                className="relative flex-1 rounded-full px-5 py-2.5 text-[12px] font-semibold tracking-wide transition-all duration-300"
               >
                 {tab === key && (
                   <motion.div
@@ -212,7 +278,7 @@ export function TechStack() {
             transition={{ duration: 0.3, ease }}
             className="mb-6 text-[11px] uppercase tracking-[0.4em] text-white/50"
           >
-            {tab === "stack" ? "TECH STACK" : "EDUCATION"}
+            {tab === "stack" ? "TECH STACK" : tab === "education" ? "EDUCATION" : "DIPLOMA"}
           </motion.p>
 
           {tab === "stack" ? (
@@ -235,8 +301,10 @@ export function TechStack() {
                 icon={Wrench}
               />
             </div>
-          ) : (
+          ) : tab === "education" ? (
             <EducationCard />
+          ) : (
+            <DiplomaCard />
           )}
         </motion.div>
       </div>

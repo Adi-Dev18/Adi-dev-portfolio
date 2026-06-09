@@ -1,13 +1,14 @@
 import { motion, useScroll, useSpring, AnimatePresence } from "framer-motion";
 import { ease } from "@/lib/motion";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import logo from "@/assets/logo.png";
 import { Menu, X } from "lucide-react";
 
 const links = [
   ["Innovation", "innovation"],
   ["Stack", "stack"],
-  ["Work", "projects"],
+  ["Projects", "/projects"],
   ["Hackathons", "hackathons"],
   ["About", "about"],
 ] as const;
@@ -59,6 +60,11 @@ export function Nav() {
   }, []);
 
   const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    // If it's a route (starts with /), let it navigate normally
+    if (id.startsWith("/")) {
+      return;
+    }
+    // Otherwise, smooth scroll to the anchor
     e.preventDefault();
     const element = document.getElementById(id);
     if (element) {
@@ -87,18 +93,32 @@ export function Nav() {
           {/* Nav links - hidden on mobile */}
           <nav className="hidden lg:flex items-center gap-7 md:gap-10">
             {links.map(([label, id]) => (
-              <a
-                key={id}
-                href={`#${id}`}
-                onClick={(e) => handleSmoothScroll(e, id)}
-                className={`magnetic-underline text-sm tracking-wide transition-all duration-300 ${
-                  activeSection === id
-                    ? "text-white opacity-100"
-                    : "text-white/60 hover:text-white hover:opacity-90"
-                }`}
-              >
-                {label}
-              </a>
+              id.startsWith("/") ? (
+                <Link
+                  key={id}
+                  to={id}
+                  className={`magnetic-underline text-sm tracking-wide transition-all duration-300 ${
+                    activeSection === id
+                      ? "text-white opacity-100"
+                      : "text-white/60 hover:text-white hover:opacity-90"
+                  }`}
+                >
+                  {label}
+                </Link>
+              ) : (
+                <a
+                  key={id}
+                  href={`#${id}`}
+                  onClick={(e) => handleSmoothScroll(e, id)}
+                  className={`magnetic-underline text-sm tracking-wide transition-all duration-300 ${
+                    activeSection === id
+                      ? "text-white opacity-100"
+                      : "text-white/60 hover:text-white hover:opacity-90"
+                  }`}
+                >
+                  {label}
+                </a>
+              )
             ))}
           </nav>
 
@@ -164,21 +184,39 @@ export function Nav() {
               {/* Menu links */}
               <nav className="flex flex-col items-center gap-8">
                 {links.map(([label, id]) => (
-                  <motion.a
-                    key={id}
-                    href={`#${id}`}
-                    onClick={(e) => {
-                      handleSmoothScroll(e, id);
-                      setIsOpen(false);
-                    }}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3, delay: 0.1 }}
-                    className="text-[clamp(1.5rem,4vw,2.2rem)] font-medium tracking-[0.08em] text-white/90 transition-all hover:text-white hover:translate-x-2"
-                    style={{ fontWeight: 500 }}
-                  >
-                    {label}
-                  </motion.a>
+                  id.startsWith("/") ? (
+                    <motion.div
+                      key={id}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.3, delay: 0.1 }}
+                    >
+                      <Link
+                        to={id}
+                        onClick={() => setIsOpen(false)}
+                        className="text-[clamp(1.5rem,4vw,2.2rem)] font-medium tracking-[0.08em] text-white/90 transition-all hover:text-white hover:translate-x-2"
+                        style={{ fontWeight: 500 }}
+                      >
+                        {label}
+                      </Link>
+                    </motion.div>
+                  ) : (
+                    <motion.a
+                      key={id}
+                      href={`#${id}`}
+                      onClick={(e) => {
+                        handleSmoothScroll(e, id);
+                        setIsOpen(false);
+                      }}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.3, delay: 0.1 }}
+                      className="text-[clamp(1.5rem,4vw,2.2rem)] font-medium tracking-[0.08em] text-white/90 transition-all hover:text-white hover:translate-x-2"
+                      style={{ fontWeight: 500 }}
+                    >
+                      {label}
+                    </motion.a>
+                  )
                 ))}
               </nav>
             </motion.div>

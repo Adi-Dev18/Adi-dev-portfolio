@@ -35,6 +35,20 @@ export const education = {
   ],
 };
 
+export const diploma = {
+  institution: "SREE DATTHA INSTITUTION",
+  program: "Diploma in Electronics & Communication Engineering (ECE)",
+  duration: "2022 – 2025",
+  overview: "Completed a Diploma in Electronics & Communication Engineering with a strong foundation in electronics, communication systems, embedded systems, and digital technologies. Developed analytical thinking, problem-solving skills, and practical engineering knowledge through both theoretical and laboratory-based learning.",
+  majorSubjects: [
+    "Foundational & Basic Sciences",
+    "Electronic Devices and Circuits",
+    "Digital Electronics",
+    "Microcontrollers",
+    "VLSI Technology",
+  ],
+};
+
 export const techStack = {
   core: ["HTML", "CSS", "React", "Tailwind CSS"],
   languages: ["JavaScript", "TypeScript", "Python"],
@@ -44,38 +58,27 @@ export const techStack = {
 export const projects = [
   {
     id: "01",
+    slug: "womens-safety-analytics",
     title: "Women's Safety Analytics Platform",
-    kind: "Machine Learning • NLP",
-    role: "End-to-end ML pipeline, NLP analysis & dashboard design",
-    year: "2026",
-    desc: "A premium case study designed to surface meaningful safety insights from real-world conversations.",
-    problem:
-      "How might we make women's safety discussions more visible through data-driven storytelling?",
-    approach:
-      "Built an end-to-end analytics pipeline that combines preprocessing, feature engineering, and model-driven visualization.",
-    results:
-      "Delivered a clear analytics dashboard with safety patterns, sentiment trends, and actionable insights.",
-    tech: ["Python", "Pandas", "NumPy", "Scikit-Learn", "Flask", "TextBlob"],
+    category: "Analytics Platform",
+    description: "A comprehensive analytics platform for women's safety with real-time data visualization, incident tracking, and predictive analytics to enhance community safety measures.",
     image: project1,
-    github: "https://github.com/Adi-Dev18/RTRP-PROJECT",
-    live: undefined as string | undefined,
+    tech: ["React", "Python", "TensorFlow", "Leaflet", "MongoDB"],
+    github: "https://github.com/adityaladdu/womens-safety-analytics",
+    liveDemo: "-",
+    featured: true,
   },
   {
     id: "02",
+    slug: "omnifood",
     title: "OmniFood",
-    kind: "Frontend Engineering",
-    role: "UI design, responsive layout & frontend implementation",
-    year: "2025",
-    desc: "A responsive editorial landing experience built for a premium food service with strong mobile-first polish.",
-    problem: "Craft a fast, accessible interface for a modern food subscription concept.",
-    approach:
-      "Designed the experience with mobile-first workflows, semantic HTML, and a clean visual hierarchy.",
-    results:
-      "Delivered polished desktop and mobile touchpoints with clear product storytelling and interaction rhythm.",
-    tech: ["HTML5", "CSS3", "Flexbox", "CSS Grid"],
+    category: "Food Delivery App",
+    description: "A modern food delivery application with real-time order tracking, restaurant discovery, and seamless checkout experience for hungry customers.",
     image: omnifood,
-    github: "https://github.com/adityaladdu/OmniFood",
-    live: "https://adityasharma18.netlify.app/",
+    tech: ["React", "Node.js", "MongoDB", "Stripe", "Tailwind CSS"],
+    github: "https://github.com/adityaladdu/omnifood",
+    liveDemo: "https://adityasharma18.netlify.app/",
+    featured: true,
   },
 ];
 
