@@ -1,4 +1,11 @@
-import { motion, useScroll, useSpring, AnimatePresence, useMotionValue, useTransform } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useSpring,
+  AnimatePresence,
+  useMotionValue,
+  useTransform,
+} from "framer-motion";
 import { ease } from "@/lib/motion";
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -100,7 +107,7 @@ export function Nav() {
 
   const handleMobileNavClick = (id: string) => {
     setIsOpen(false);
-    
+
     if (id.startsWith("/")) {
       navigate(id);
       return;
@@ -136,10 +143,7 @@ export function Nav() {
       >
         <div className="container-page flex items-center justify-between py-5 md:py-6">
           {/* Logo / Name */}
-          <Link
-            to="/"
-            className="flex items-center gap-2 transition-opacity hover:opacity-70"
-          >
+          <Link to="/" className="flex items-center gap-2 transition-opacity hover:opacity-70">
             <img src={logo} alt="Aditya" className="h-6 w-6" />
             <span className="text-[0.75rem] tracking-[0.4em] text-white/75">Aditya</span>
           </Link>
@@ -203,7 +207,10 @@ export function Nav() {
               aria-label="Open navigation menu"
               className="lg:hidden flex items-center"
             >
-              <Menu className="size-6 text-white/90 transition-colors hover:text-white" strokeWidth={2} />
+              <Menu
+                className="size-6 text-white/90 transition-colors hover:text-white"
+                strokeWidth={2}
+              />
             </button>
           </div>
         </div>
@@ -241,7 +248,10 @@ export function Nav() {
                 aria-label="Close navigation menu"
                 className="absolute top-6 right-6 p-2"
               >
-                <X className="size-8 text-white/90 transition-colors hover:text-white" strokeWidth={2} />
+                <X
+                  className="size-8 text-white/90 transition-colors hover:text-white"
+                  strokeWidth={2}
+                />
               </button>
 
               {/* Menu links */}

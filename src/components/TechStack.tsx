@@ -105,9 +105,7 @@ function EducationCard() {
 
       {/* Date range */}
       <div>
-        <p className="text-[1rem] font-medium text-white/70">
-          {education.period}
-        </p>
+        <p className="text-[1rem] font-medium text-white/70">{education.period}</p>
       </div>
 
       {/* Divider */}
@@ -115,12 +113,13 @@ function EducationCard() {
 
       {/* Major subjects */}
       <div>
-        <p className="mb-6 text-[1.375rem] font-semibold text-white/90">
-          Major Subjects
-        </p>
+        <p className="mb-6 text-[1.375rem] font-semibold text-white/90">Major Subjects</p>
         <ul className="space-y-4">
           {education.majorSubjects.map((subject) => (
-            <li key={subject} className="flex items-center gap-4 text-[1.125rem] text-white/70 leading-relaxed">
+            <li
+              key={subject}
+              className="flex items-center gap-4 text-[1.125rem] text-white/70 leading-relaxed"
+            >
               <span className="size-2 flex-shrink-0 rounded-full bg-white/40" />
               {subject}
             </li>
@@ -156,9 +155,7 @@ function DiplomaCard() {
 
       {/* Duration */}
       <div>
-        <p className="text-[1rem] font-medium text-white/70">
-          {diploma.duration}
-        </p>
+        <p className="text-[1rem] font-medium text-white/70">{diploma.duration}</p>
       </div>
 
       {/* Divider */}
@@ -166,12 +163,8 @@ function DiplomaCard() {
 
       {/* Overview */}
       <div>
-        <p className="mb-6 text-[1.375rem] font-semibold text-white/90">
-          Overview
-        </p>
-        <p className="text-[1.125rem] text-white/70 leading-relaxed">
-          {diploma.overview}
-        </p>
+        <p className="mb-6 text-[1.375rem] font-semibold text-white/90">Overview</p>
+        <p className="text-[1.125rem] text-white/70 leading-relaxed">{diploma.overview}</p>
       </div>
 
       {/* Divider */}
@@ -179,12 +172,13 @@ function DiplomaCard() {
 
       {/* Major subjects */}
       <div>
-        <p className="mb-6 text-[1.375rem] font-semibold text-white/90">
-          Major Subjects
-        </p>
+        <p className="mb-6 text-[1.375rem] font-semibold text-white/90">Major Subjects</p>
         <ul className="space-y-4">
           {diploma.majorSubjects.map((subject) => (
-            <li key={subject} className="flex items-center gap-4 text-[1.125rem] text-white/70 leading-relaxed">
+            <li
+              key={subject}
+              className="flex items-center gap-4 text-[1.125rem] text-white/70 leading-relaxed"
+            >
               <span className="size-2 flex-shrink-0 rounded-full bg-white/40" />
               {subject}
             </li>
@@ -194,8 +188,6 @@ function DiplomaCard() {
     </motion.div>
   );
 }
-
-
 
 /* ─── Main export ─── */
 export function TechStack() {
@@ -212,9 +204,7 @@ export function TechStack() {
           transition={{ duration: 0.8, ease }}
           className="mb-10"
         >
-          <p className="text-[11px] uppercase tracking-[0.4em] text-white/40">
-            02 / Stack
-          </p>
+          <p className="text-[11px] uppercase tracking-[0.4em] text-white/40">02 / Stack</p>
           <h2 className="mt-4 text-[clamp(1.8rem,4vw,2.6rem)] font-bold uppercase leading-none tracking-tight text-white">
             Tech Stack & Education
           </h2>
@@ -222,7 +212,10 @@ export function TechStack() {
 
         {/* Tab pill switcher with sliding active indicator */}
         <LayoutGroup>
-          <div className="mb-8 inline-flex w-full max-w-md overflow-hidden rounded-full border border-white/10 bg-[#0d0f17] p-1" style={{ borderColor: "rgba(255,255,255,0.14)" }}>
+          <div
+            className="mb-8 inline-flex w-full max-w-md overflow-hidden rounded-full border border-white/10 bg-[#0d0f17] p-1"
+            style={{ borderColor: "rgba(255,255,255,0.14)" }}
+          >
             {(
               [
                 ["stack", "Tech Stack"],
@@ -250,9 +243,7 @@ export function TechStack() {
                 )}
                 <span
                   className={`relative z-10 transition-colors duration-300 ${
-                    tab === key
-                      ? "text-white"
-                      : "text-white/55 hover:text-white/85"
+                    tab === key ? "text-white" : "text-white/55 hover:text-white/85"
                   }`}
                   style={{ fontWeight: tab === key ? 600 : 500 }}
                 >
@@ -283,23 +274,17 @@ export function TechStack() {
 
           {tab === "stack" ? (
             <div className="space-y-8">
-              <TechCategory
-                label="Core"
-                items={techStack.core}
-                icon={Code2}
+              <TechCategory label="Core" items={techStack.core} icon={Code2} />
+              <div
+                className="h-px w-full bg-white/[0.06]"
+                style={{ background: "rgba(255,255,255,0.08)" }}
               />
-              <div className="h-px w-full bg-white/[0.06]" style={{ background: "rgba(255,255,255,0.08)" }} />
-              <TechCategory
-                label="Languages"
-                items={techStack.languages}
-                icon={Wrench}
+              <TechCategory label="Languages" items={techStack.languages} icon={Wrench} />
+              <div
+                className="h-px w-full bg-white/[0.06]"
+                style={{ background: "rgba(255,255,255,0.08)" }}
               />
-              <div className="h-px w-full bg-white/[0.06]" style={{ background: "rgba(255,255,255,0.08)" }} />
-              <TechCategory
-                label="Tools"
-                items={techStack.tools}
-                icon={Wrench}
-              />
+              <TechCategory label="Tools" items={techStack.tools} icon={Wrench} />
             </div>
           ) : tab === "education" ? (
             <EducationCard />

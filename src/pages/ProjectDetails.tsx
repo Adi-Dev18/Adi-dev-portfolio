@@ -1,7 +1,21 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams, Navigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, ExternalLink, Github, X, ChevronLeft, ChevronRight, Zap, Lightbulb, Rocket, Code, CheckCircle2, Target, Award } from "lucide-react";
+import {
+  ArrowLeft,
+  ExternalLink,
+  Github,
+  X,
+  ChevronLeft,
+  ChevronRight,
+  Zap,
+  Lightbulb,
+  Rocket,
+  Code,
+  CheckCircle2,
+  Target,
+  Award,
+} from "lucide-react";
 import { projects } from "@/lib/portfolio-data";
 import { ease } from "@/lib/motion";
 import { Nav } from "@/components/Nav";
@@ -37,7 +51,9 @@ export default function ProjectDetails() {
         setCurrentImageIndex((prev) => (prev + 1) % project.screenshots.length);
       }
       if (e.key === "ArrowLeft") {
-        setCurrentImageIndex((prev) => (prev - 1 + project.screenshots.length) % project.screenshots.length);
+        setCurrentImageIndex(
+          (prev) => (prev - 1 + project.screenshots.length) % project.screenshots.length,
+        );
       }
     };
     window.addEventListener("keydown", handleKeyDown);
@@ -56,7 +72,7 @@ export default function ProjectDetails() {
   return (
     <main className="relative min-h-screen bg-black text-white">
       <Nav />
-      
+
       {/* Hero Section */}
       <section className="relative overflow-hidden pt-32 pb-24 md:pt-40 md:pb-32">
         <div className="container-page relative z-10">
@@ -81,7 +97,9 @@ export default function ProjectDetails() {
             <h1 className="mt-6 text-[clamp(3rem,8vw,5.5rem)] font-bold leading-tight text-white">
               {project.title}
             </h1>
-            <p className="mt-6 max-w-3xl text-lg leading-8 text-white/65">{project.fullDescription}</p>
+            <p className="mt-6 max-w-3xl text-lg leading-8 text-white/65">
+              {project.fullDescription}
+            </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <span className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/70">
                 {project.category}
@@ -236,10 +254,18 @@ export default function ProjectDetails() {
         </motion.div>
         <div className="mt-8 space-y-4">
           {[
-            { icon: Lightbulb, title: "Research", desc: "Deep dive into requirements and user needs" },
+            {
+              icon: Lightbulb,
+              title: "Research",
+              desc: "Deep dive into requirements and user needs",
+            },
             { icon: Code, title: "Design", desc: "Wireframing and prototyping the solution" },
             { icon: Zap, title: "Development", desc: "Building with modern technologies" },
-            { icon: CheckCircle2, title: "Testing", desc: "Rigorous QA and performance optimization" },
+            {
+              icon: CheckCircle2,
+              title: "Testing",
+              desc: "Rigorous QA and performance optimization",
+            },
             { icon: Rocket, title: "Deployment", desc: "Launch and continuous monitoring" },
           ].map((step, index) => (
             <motion.div
@@ -433,9 +459,7 @@ export default function ProjectDetails() {
           transition={{ duration: 0.7, ease }}
         >
           <p className="text-[11px] uppercase tracking-[0.42em] text-white/40">Related projects</p>
-          <h2 className="mt-4 text-[clamp(2rem,4vw,3rem)] font-semibold text-white">
-            More Work
-          </h2>
+          <h2 className="mt-4 text-[clamp(2rem,4vw,3rem)] font-semibold text-white">More Work</h2>
         </motion.div>
 
         <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -471,12 +495,14 @@ export default function ProjectDetails() {
             >
               <X className="size-6" strokeWidth={1.5} />
             </button>
-            
+
             <button
               type="button"
               onClick={(e) => {
                 e.stopPropagation();
-                setCurrentImageIndex((prev) => (prev - 1 + project.screenshots.length) % project.screenshots.length);
+                setCurrentImageIndex(
+                  (prev) => (prev - 1 + project.screenshots.length) % project.screenshots.length,
+                );
               }}
               className="absolute left-6 top-1/2 -translate-y-1/2 rounded-full bg-white/10 p-3 text-white transition hover:bg-white/20"
             >

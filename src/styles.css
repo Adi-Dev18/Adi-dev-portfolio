@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@theme {
+:root {
   --font-sans: "Rubik", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Rubik", ui-sans-serif, system-ui, sans-serif;
   --color-foreground: #ffffff;

@@ -35,7 +35,9 @@ export function ProjectCard({ project, index, onClick }: ProjectCardProps) {
       {/* Compact Information Section */}
       <div className="flex flex-1 flex-col px-6 pt-2 pb-3">
         <h3 className="text-[18px] font-bold leading-tight text-white">{project.title}</h3>
-        <p className="mt-2 text-[13px] leading-relaxed text-white/60 line-clamp-2">{project.description}</p>
+        <p className="mt-2 text-[13px] leading-relaxed text-white/60 line-clamp-2">
+          {project.description}
+        </p>
 
         {/* Tech Stack Pills */}
         <div className="mt-3 flex flex-wrap gap-2">
@@ -101,9 +103,7 @@ export function Projects() {
           className="mb-12 flex items-end justify-between"
         >
           <div>
-            <p className="text-[11px] uppercase tracking-[0.4em] text-white/40 mb-3">
-              03 / Work
-            </p>
+            <p className="text-[11px] uppercase tracking-[0.4em] text-white/40 mb-3">03 / Work</p>
             <h2 className="font-serif text-[clamp(1.8rem,4vw,2.8rem)] font-bold italic leading-none text-white">
               Featured Projects
             </h2>

@@ -16,7 +16,7 @@ import yukthi2 from "@/assets/Yukthi 2.png";
 export const social = {
   github: "https://github.com/adityaladdu",
   linkedin: "https://www.linkedin.com/in/aditya-kumar-833112258/",
-  email: "hello@aditya.dev",
+  email: "adithyaluddu@gmail.com",
   location: "Hyderabad, India",
 };
 
@@ -39,7 +39,8 @@ export const diploma = {
   institution: "SREE DATTHA INSTITUTION",
   program: "Diploma in Electronics & Communication Engineering (ECE)",
   duration: "2022 – 2025",
-  overview: "Completed a Diploma in Electronics & Communication Engineering with a strong foundation in electronics, communication systems, embedded systems, and digital technologies. Developed analytical thinking, problem-solving skills, and practical engineering knowledge through both theoretical and laboratory-based learning.",
+  overview:
+    "Completed a Diploma in Electronics & Communication Engineering with a strong foundation in electronics, communication systems, embedded systems, and digital technologies. Developed analytical thinking, problem-solving skills, and practical engineering knowledge through both theoretical and laboratory-based learning.",
   majorSubjects: [
     "Foundational & Basic Sciences",
     "Electronic Devices and Circuits",
@@ -61,7 +62,8 @@ export const projects = [
     slug: "womens-safety-analytics",
     title: "Women's Safety Analytics Platform",
     category: "Analytics Platform",
-    description: "A comprehensive analytics platform for women's safety with real-time data visualization, incident tracking, and predictive analytics to enhance community safety measures.",
+    description:
+      "A comprehensive analytics platform for women's safety with real-time data visualization, incident tracking, and predictive analytics to enhance community safety measures.",
     image: project1,
     tech: ["React", "Python", "TensorFlow", "Leaflet", "MongoDB"],
     github: "https://github.com/adityaladdu/womens-safety-analytics",
@@ -73,7 +75,8 @@ export const projects = [
     slug: "omnifood",
     title: "OmniFood",
     category: "Food Delivery App",
-    description: "A modern food delivery application with real-time order tracking, restaurant discovery, and seamless checkout experience for hungry customers.",
+    description:
+      "A modern food delivery application with real-time order tracking, restaurant discovery, and seamless checkout experience for hungry customers.",
     image: omnifood,
     tech: ["React", "Node.js", "MongoDB", "Stripe", "Tailwind CSS"],
     github: "https://github.com/adityaladdu/omnifood",
