@@ -1,11 +1,4 @@
-import {
-  motion,
-  useScroll,
-  useSpring,
-  AnimatePresence,
-  useMotionValue,
-  useTransform,
-} from "framer-motion";
+import { motion, useScroll, useSpring, AnimatePresence } from "framer-motion";
 import { ease } from "@/lib/motion";
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -19,6 +12,8 @@ const links = [
   ["Hackathons", "hackathons"],
   ["About", "about"],
 ] as const;
+
+const getSectionId = (id: string) => (id.startsWith("/") ? id.slice(1) : id);
 
 export function Nav() {
   const { scrollYProgress } = useScroll();
@@ -56,14 +51,15 @@ export function Nav() {
     } else if (location.pathname === "/") {
       // Only run scroll-spy on homepage
       const handleScroll = () => {
-        const sections = links.map(([_, id]) => document.getElementById(id)).filter(Boolean);
+        const sections = links
+          .map(([_, id]) => document.getElementById(getSectionId(id)))
+          .filter(Boolean) as HTMLElement[];
         const scrollPosition = window.scrollY + 100;
 
         for (let i = sections.length - 1; i >= 0; i--) {
           const section = sections[i];
           if (section && section.offsetTop <= scrollPosition) {
-            const sectionId = section.id;
-            setActiveSection(sectionId);
+            setActiveSection(section.id);
             break;
           }
         }
@@ -150,43 +146,47 @@ export function Nav() {
 
           {/* Nav links - hidden on mobile */}
           <nav className="hidden lg:flex items-center gap-7 md:gap-10 relative">
-            {links.map(([label, id]) => (
-              <div key={id} className="relative">
-                {id.startsWith("/") ? (
-                  <Link
-                    to={id}
-                    className={`magnetic-underline text-sm tracking-wide transition-all duration-300 ${
-                      activeSection === id
-                        ? "text-white opacity-100"
-                        : "text-white/60 hover:text-white hover:opacity-90"
-                    }`}
-                  >
-                    {label}
-                  </Link>
-                ) : (
-                  <a
-                    key={id}
-                    href={`#${id}`}
-                    onClick={(e) => handleSmoothScroll(e, id)}
-                    className={`magnetic-underline text-sm tracking-wide transition-all duration-300 ${
-                      activeSection === id
-                        ? "text-white opacity-100"
-                        : "text-white/60 hover:text-white hover:opacity-90"
-                    }`}
-                  >
-                    {label}
-                  </a>
-                )}
-                {activeSection === id && (
-                  <motion.div
-                    layoutId="activeNav"
-                    className="absolute -bottom-1 left-0 right-0 h-[2px]"
-                    style={{ background: "#FF8C42" }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                  />
-                )}
-              </div>
-            ))}
+            {links.map(([label, id]) => {
+              const isActive = activeSection === id || activeSection === getSectionId(id);
+
+              return (
+                <div key={id} className="relative">
+                  {id.startsWith("/") ? (
+                    <Link
+                      to={id}
+                      className={`magnetic-underline text-sm tracking-wide transition-all duration-300 ${
+                        isActive
+                          ? "text-white opacity-100"
+                          : "text-white/60 hover:text-white hover:opacity-90"
+                      }`}
+                    >
+                      {label}
+                    </Link>
+                  ) : (
+                    <a
+                      key={id}
+                      href={`#${id}`}
+                      onClick={(e) => handleSmoothScroll(e, id)}
+                      className={`magnetic-underline text-sm tracking-wide transition-all duration-300 ${
+                        isActive
+                          ? "text-white opacity-100"
+                          : "text-white/60 hover:text-white hover:opacity-90"
+                      }`}
+                    >
+                      {label}
+                    </a>
+                  )}
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeNav"
+                      className="absolute -bottom-1 left-0 right-0 h-[2px]"
+                      style={{ background: "#FF8C42" }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                    />
+                  )}
+                </div>
+              );
+            })}
           </nav>
 
           {/* Right side: Available dot (desktop) or Hamburger (mobile) */}
