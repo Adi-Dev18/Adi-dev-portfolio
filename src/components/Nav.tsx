@@ -179,7 +179,7 @@ export function Nav() {
                   {isActive && (
                     <motion.div
                       layoutId="activeNav"
-                      className="absolute -bottom-1 left-0 right-0 h-[2px]"
+                      className="absolute -bottom-1 left-0 right-0 h-0.5"
                       style={{ background: "#FF8C42" }}
                       transition={{ duration: 0.3, ease: "easeInOut" }}
                     />
@@ -230,7 +230,7 @@ export function Nav() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[60] bg-black"
+            className="fixed inset-0 z-60 bg-black"
             onClick={() => setIsOpen(false)}
           >
             <motion.div

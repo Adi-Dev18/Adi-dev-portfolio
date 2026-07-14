@@ -65,9 +65,8 @@ export const projects = [
     description:
       "A comprehensive analytics platform for women's safety with real-time data visualization, incident tracking, and predictive analytics to enhance community safety measures.",
     image: project1,
-    tech: ["React", "Python", "TensorFlow", "Leaflet", "MongoDB"],
+    tech: ["Python"],
     github: "https://github.com/adityaladdu/womens-safety-analytics",
-    liveDemo: "-",
     featured: true,
   },
   {
