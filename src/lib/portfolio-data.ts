@@ -77,7 +77,7 @@ export const projects = [
     description:
       "A modern food delivery application with real-time order tracking, restaurant discovery, and seamless checkout experience for hungry customers.",
     image: omnifood,
-    tech: ["React", "Node.js", "MongoDB", "Stripe", "Tailwind CSS"],
+    tech: ["HTML", "CSS", "JS"],
     github: "https://github.com/adityaladdu/omnifood",
     liveDemo: "https://adityasharma18.netlify.app/",
     featured: true,
