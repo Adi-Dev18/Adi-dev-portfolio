@@ -125,7 +125,7 @@ export function About() {
                 style={{ borderColor: "rgba(255,255,255,0.08)" }}
               >
                 <span className="absolute left-0 top-1.5 size-1.5 rounded-full bg-[#f97316]" />
-                <h4 className="font-display text-2xl font-bold text-white md:text-3xl">5+</h4>
+                <h4 className="font-display text-2xl font-bold text-white md:text-3xl">2+</h4>
                 <p className="mt-1 text-[10px] uppercase tracking-wider text-white/50">Projects</p>
               </div>
               <div
@@ -133,7 +133,7 @@ export function About() {
                 style={{ borderColor: "rgba(255,255,255,0.08)" }}
               >
                 <span className="absolute left-0 top-1.5 size-1.5 rounded-full bg-[#f97316]" />
-                <h4 className="font-display text-2xl font-bold text-white md:text-3xl">10+</h4>
+                <h4 className="font-display text-2xl font-bold text-white md:text-3xl">3+</h4>
                 <p className="mt-1 text-[10px] uppercase tracking-wider text-white/50">
                   Technologies
                 </p>
