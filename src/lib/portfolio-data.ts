@@ -66,7 +66,7 @@ export const projects = [
       "A comprehensive analytics platform for women's safety with real-time data visualization, incident tracking, and predictive analytics to enhance community safety measures.",
     image: project1,
     tech: ["Python"],
-    github: "https://github.com/adityaladdu/womens-safety-analytics",
+    github: "https://github.com/Adi-Dev18/RTRP-PROJECT",
     featured: true,
   },
   {
