@@ -24,7 +24,6 @@ import { LayoutGroup } from "framer-motion";
 
 type Tab = "stack" | "education" | "diploma";
 
-/* ─── Icon map ─── */
 const iconMap: Record<string, LucideIcon> = {
   HTML: FileCode,
   CSS: Palette,
@@ -40,7 +39,6 @@ const iconMap: Record<string, LucideIcon> = {
   "React Hook Form": FormInput,
 };
 
-/* ─── Single tech item (icon + label inline) ─── */
 function TechItem({ name }: { name: string }) {
   const Icon = iconMap[name] ?? Code2;
   return (
@@ -51,7 +49,6 @@ function TechItem({ name }: { name: string }) {
   );
 }
 
-/* ─── Category block ─── */
 function TechCategory({
   label,
   items,
@@ -79,7 +76,6 @@ function TechCategory({
   );
 }
 
-/* ─── Education tab ─── */
 function EducationCard() {
   return (
     <motion.div
@@ -130,7 +126,6 @@ function EducationCard() {
   );
 }
 
-/* ─── Diploma tab ─── */
 function DiplomaCard() {
   return (
     <motion.div
@@ -189,7 +184,6 @@ function DiplomaCard() {
   );
 }
 
-/* ─── Main export ─── */
 export function TechStack() {
   const [tab, setTab] = useState<Tab>("stack");
 

@@ -1,8 +1,13 @@
-import { useLayoutEffect } from "react";
+import { lazy, Suspense, useLayoutEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Home } from "@/pages/Home";
-import ProjectDetails from "@/pages/ProjectDetails";
-import ProjectsPage from "@/pages/Projects";
+
+const Home = lazy(() => import("@/pages/Home").then((module) => ({ default: module.Home })));
+const ProjectDetails = lazy(() => import("@/pages/ProjectDetails"));
+const ProjectsPage = lazy(() => import("@/pages/Projects"));
+
+function RouteFallback() {
+  return <div className="min-h-screen bg-black" aria-busy="true" />;
+}
 
 export default function App() {
   useLayoutEffect(() => {
@@ -12,9 +17,30 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/projects" element={<ProjectsPage />} />
-        <Route path="/projects/:slug" element={<ProjectDetails />} />
+        <Route
+          path="/"
+          element={
+            <Suspense fallback={<RouteFallback />}>
+              <Home />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/projects"
+          element={
+            <Suspense fallback={<RouteFallback />}>
+              <ProjectsPage />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/projects/:slug"
+          element={
+            <Suspense fallback={<RouteFallback />}>
+              <ProjectDetails />
+            </Suspense>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

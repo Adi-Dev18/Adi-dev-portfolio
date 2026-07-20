@@ -1,30 +1,56 @@
 import { motion } from "framer-motion";
-import { useState, useRef } from "react";
+import { useMemo, useRef, useState, type MouseEvent } from "react";
 import {
+  BarChart3,
   Bot,
   Code2,
   Compass,
   Lightbulb,
-  Search,
-  BarChart3,
   MessageSquare,
+  Search,
   Sparkles,
 } from "lucide-react";
 import { ease, fadeUp, stagger } from "@/lib/motion";
+
+type CanvasCardProps = {
+  children: React.ReactNode;
+  className?: string;
+  position: { top: string; left: string };
+  intensity: number;
+  hover?: boolean;
+  accent?: boolean;
+};
+
+function CanvasCard({ children, className, position, intensity, hover = false }: CanvasCardProps) {
+  return (
+    <div
+      className={className}
+      style={{
+        position: "absolute",
+        top: position.top,
+        left: position.left,
+        transform: hover ? `translate(${intensity}px, ${intensity}px)` : "translate(0px, 0px)",
+        transition: "transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)",
+        borderColor: "rgba(255,255,255,0.14)",
+        borderWidth: "1px",
+      }}
+    >
+      {children}
+    </div>
+  );
+}
 
 export function InnovationCanvas() {
   const canvasRef = useRef<HTMLDivElement>(null);
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
-
-  // Clickable interactive Figma element state
   const [toggleActive, setToggleActive] = useState(true);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseMove = (event: MouseEvent<HTMLDivElement>) => {
     if (!canvasRef.current) return;
     const rect = canvasRef.current.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    const x = (event.clientX - rect.left) / rect.width - 0.5;
+    const y = (event.clientY - rect.top) / rect.height - 0.5;
     setMouse({ x, y });
     setIsHovered(true);
   };
@@ -34,11 +60,22 @@ export function InnovationCanvas() {
     setMouse({ x: 0, y: 0 });
   };
 
+  const cardMotion = useMemo(
+    () => ({
+      cardOne: isHovered ? mouse.x * 15 : 0,
+      cardTwo: isHovered ? mouse.x * 8 : 0,
+      cardThree: isHovered ? mouse.x * 24 : 0,
+      cardFour: isHovered ? mouse.x * 12 : 0,
+      cardFive: isHovered ? mouse.x * -10 : 0,
+      cardSix: isHovered ? mouse.x * 18 : 0,
+    }),
+    [isHovered, mouse.x],
+  );
+
   return (
     <section id="innovation" className="relative overflow-x-hidden bg-black py-28 md:py-40">
       <div className="container-page">
         <div className="grid min-w-0 items-center gap-16 lg:grid-cols-[35%_65%]">
-          {/* LEFT COLUMN: Large Typography & Massive Whitespace */}
           <motion.div
             variants={stagger(0.12)}
             initial="hidden"
@@ -56,7 +93,7 @@ export function InnovationCanvas() {
             <motion.h2
               variants={fadeUp}
               transition={{ duration: 1.1, ease }}
-              className="text-display mt-8 max-w-full font-bold uppercase text-white text-[clamp(2.5rem,5.5vw,4.5rem)] leading-[0.9] tracking-[-0.04em]"
+              className="mt-8 max-w-full text-[clamp(2.5rem,5.5vw,4.5rem)] font-bold uppercase leading-[0.9] tracking-[-0.04em] text-white"
             >
               FROM IDEAS
               <br />
@@ -67,30 +104,23 @@ export function InnovationCanvas() {
             <motion.p
               variants={fadeUp}
               transition={{ duration: 1.1, ease }}
-              className="mt-8 text-sm leading-relaxed text-white/50 max-w-xs"
+              className="mt-8 max-w-xs text-sm leading-relaxed text-white/50"
             >
               An interactive visual map of my research, planning, product architecture, frontend
               engineering, and AI workflow pipeline.
             </motion.p>
           </motion.div>
 
-          {/* RIGHT COLUMN: Interactive Miro-Style Collaborative Canvas */}
           <div
             ref={canvasRef}
-            className="relative w-full overflow-x-auto overflow-y-hidden md:overflow-visible scrollbar-none py-4"
+            className="relative w-full overflow-x-auto overflow-y-hidden py-4 md:overflow-visible"
           >
             <div
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
-              className="relative min-w-[780px] md:min-w-0 h-[580px] w-full bg-black rounded-lg overflow-hidden [background-image:radial-gradient(rgba(255,255,255,0.06)_1px,transparent_1px)] [background-size:24px_24px] group/canvas transition-all duration-300"
-              style={{
-                borderColor: "rgba(255,255,255,0.14)",
-                borderWidth: "1px",
-              }}
+              className="relative h-[580px] w-full min-w-[780px] overflow-hidden rounded-lg border border-white/10 bg-black bg-[radial-gradient(rgba(255,255,255,0.06)_1px,transparent_1px)] bg-size-[24px_24px] transition-all duration-300 md:min-w-0"
             >
-              {/* Flowing Connected SVG Paths */}
-              <svg className="absolute inset-0 pointer-events-none size-full z-0">
-                {/* 1. Research -> Planning */}
+              <svg className="pointer-events-none absolute inset-0 z-0 size-full">
                 <motion.path
                   d="M 180,95 C 260,95 280,85 380,85"
                   fill="none"
@@ -100,8 +130,6 @@ export function InnovationCanvas() {
                   animate={{ strokeDashoffset: [0, -20] }}
                   transition={{ repeat: Infinity, ease: "linear", duration: 1.5 }}
                 />
-
-                {/* 2. Planning -> Figma Component */}
                 <motion.path
                   d="M 380,85 C 280,120 180,180 180,240"
                   fill="none"
@@ -111,8 +139,6 @@ export function InnovationCanvas() {
                   animate={{ strokeDashoffset: [0, -20] }}
                   transition={{ repeat: Infinity, ease: "linear", duration: 1.5 }}
                 />
-
-                {/* 3. Figma Component -> AI Router */}
                 <motion.path
                   d="M 180,290 C 280,290 320,270 380,270"
                   fill="none"
@@ -122,8 +148,6 @@ export function InnovationCanvas() {
                   animate={{ strokeDashoffset: [0, -20] }}
                   transition={{ repeat: Infinity, ease: "linear", duration: 1.5 }}
                 />
-
-                {/* 4. AI Router -> Latency Metrics */}
                 <motion.path
                   d="M 380,270 C 380,340 180,380 150,420"
                   fill="none"
@@ -133,8 +157,6 @@ export function InnovationCanvas() {
                   animate={{ strokeDashoffset: [0, -20] }}
                   transition={{ repeat: Infinity, ease: "linear", duration: 1.5 }}
                 />
-
-                {/* 5. AI Router -> Customer voice */}
                 <motion.path
                   d="M 380,270 C 380,340 340,365 360,420"
                   fill="none"
@@ -146,20 +168,11 @@ export function InnovationCanvas() {
                 />
               </svg>
 
-              {/* CARD 1: Research signal note (Subtle parallax depth) */}
-              <div
-                style={{
-                  position: "absolute",
-                  top: "12%",
-                  left: "6%",
-                  transform: isHovered
-                    ? `translate(${mouse.x * 15}px, ${mouse.y * 15}px)`
-                    : "translate(0px, 0px)",
-                  transition: "transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)",
-                  borderColor: "rgba(255,255,255,0.20)",
-                  borderWidth: "1px",
-                }}
-                className="z-10 w-full max-w-[200px] border-dashed bg-black/60 p-4 rounded-lg transition-all duration-300 hover:border-[rgba(255,255,255,0.25)] hover:scale-[1.015]"
+              <CanvasCard
+                position={{ top: "12%", left: "6%" }}
+                intensity={cardMotion.cardOne}
+                hover={isHovered}
+                className="z-10 w-full max-w-[200px] rounded-lg border-dashed bg-black/60 p-4 transition-all duration-300 hover:scale-[1.015] hover:border-white/25"
               >
                 <div className="flex items-center gap-2 text-white/50">
                   <Search className="size-3.5" strokeWidth={1.5} />
@@ -169,22 +182,13 @@ export function InnovationCanvas() {
                 <p className="mt-2 text-[10px] leading-relaxed text-white/60">
                   76% of users request optimized caching workflows to reduce query costs.
                 </p>
-              </div>
+              </CanvasCard>
 
-              {/* CARD 2: Sprint Kanban Item */}
-              <div
-                style={{
-                  position: "absolute",
-                  top: "8%",
-                  left: "54%",
-                  transform: isHovered
-                    ? `translate(${mouse.x * 8}px, ${mouse.y * 8}px)`
-                    : "translate(0px, 0px)",
-                  transition: "transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)",
-                  borderColor: "rgba(255,255,255,0.14)",
-                  borderWidth: "1px",
-                }}
-                className="z-10 w-full max-w-[220px] bg-transparent p-4 rounded-lg transition-all duration-300 hover:border-[rgba(255,255,255,0.25)] hover:bg-[rgba(255,255,255,0.01)] hover:scale-[1.015]"
+              <CanvasCard
+                position={{ top: "8%", left: "54%" }}
+                intensity={cardMotion.cardTwo}
+                hover={isHovered}
+                className="z-10 w-full max-w-[220px] rounded-lg bg-transparent p-4 transition-all duration-300 hover:scale-[1.015] hover:border-white/25 hover:bg-white/[0.01]"
               >
                 <div className="flex items-center justify-between text-white/50">
                   <div className="flex items-center gap-1.5">
@@ -199,35 +203,18 @@ export function InnovationCanvas() {
                 </p>
                 <div className="mt-3 flex items-center justify-between text-[9px]">
                   <span className="text-white/40">Sprint backlog</span>
-                  <span
-                    className="rounded-lg border px-1.5 py-0.5 text-white font-medium uppercase"
-                    style={{
-                      borderColor: "rgba(255,255,255,0.14)",
-                      backgroundColor: "rgba(255,255,255,0.04)",
-                      color: "rgba(255,255,255,0.7)",
-                    }}
-                  >
+                  <span className="rounded-lg border border-white/10 bg-white/5 px-1.5 py-0.5 font-medium uppercase text-white/70">
                     High Priority
                   </span>
                 </div>
-              </div>
+              </CanvasCard>
 
-              {/* CARD 3: Figma Interactive UI Switch Frame */}
-              <div
-                style={{
-                  position: "absolute",
-                  top: "40%",
-                  left: "8%",
-                  transform: isHovered
-                    ? `translate(${mouse.x * 24}px, ${mouse.y * 24}px)`
-                    : "translate(0px, 0px)",
-                  transition: "transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)",
-                  boxShadow: toggleActive ? "0 0 20px rgba(255, 255, 255, 0.05)" : "none",
-                  borderColor: toggleActive ? "rgba(255,255,255,0.25)" : "rgba(255,255,255,0.14)",
-                  borderWidth: "1px",
-                }}
-                className={`z-10 w-full max-w-[210px] p-4 rounded-lg transition-all duration-300 ${
-                  toggleActive ? "bg-[rgba(255,255,255,0.02)]" : "bg-transparent"
+              <CanvasCard
+                position={{ top: "40%", left: "8%" }}
+                intensity={cardMotion.cardThree}
+                hover={isHovered}
+                className={`z-10 w-full max-w-[210px] rounded-lg p-4 transition-all duration-300 ${
+                  toggleActive ? "bg-white/[0.02]" : "bg-transparent"
                 }`}
               >
                 <div className="flex items-center justify-between text-white/50">
@@ -238,16 +225,15 @@ export function InnovationCanvas() {
                   <span className="text-[9px] tracking-wide text-white/40">Figma Live</span>
                 </div>
 
-                {/* Toggle interactive component */}
                 <div className="mt-4 flex items-center justify-between">
                   <span className="text-xs text-white">Interactive Cache</span>
                   <button
                     type="button"
-                    onClick={() => setToggleActive(!toggleActive)}
+                    onClick={() => setToggleActive((current) => !current)}
                     className="cursor-pointer text-white transition-opacity hover:opacity-80"
                   >
                     <div
-                      className={`w-8 h-4 rounded-full p-0.5 transition-colors duration-300 ${
+                      className={`h-4 w-8 rounded-full p-0.5 transition-colors duration-300 ${
                         toggleActive ? "bg-white" : "bg-white/20"
                       }`}
                     >
@@ -260,12 +246,7 @@ export function InnovationCanvas() {
                   </button>
                 </div>
 
-                <div
-                  className="mt-4 border-t pt-3 flex items-center gap-2"
-                  style={{
-                    borderColor: "rgba(255,255,255,0.05)",
-                  }}
-                >
+                <div className="mt-4 flex items-center gap-2 border-t border-white/5 pt-3">
                   <Lightbulb
                     className={`size-3.5 transition-colors duration-300 ${
                       toggleActive
@@ -278,22 +259,13 @@ export function InnovationCanvas() {
                     {toggleActive ? "Cache layer active" : "Cache bypassed"}
                   </span>
                 </div>
-              </div>
+              </CanvasCard>
 
-              {/* CARD 4: AI Workflow router Node */}
-              <div
-                style={{
-                  position: "absolute",
-                  top: "35%",
-                  left: "56%",
-                  transform: isHovered
-                    ? `translate(${mouse.x * 12}px, ${mouse.y * 12}px)`
-                    : "translate(0px, 0px)",
-                  transition: "transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)",
-                  borderColor: "rgba(255,255,255,0.14)",
-                  borderWidth: "1px",
-                }}
-                className="z-10 w-full max-w-[240px] bg-[#111111]/90 p-4 rounded-lg transition-all duration-300 hover:border-[rgba(255,255,255,0.30)] hover:scale-[1.015]"
+              <CanvasCard
+                position={{ top: "35%", left: "56%" }}
+                intensity={cardMotion.cardFour}
+                hover={isHovered}
+                className="z-10 w-full max-w-[240px] rounded-lg bg-[#111111]/90 p-4 transition-all duration-300 hover:scale-[1.015] hover:border-white/30"
               >
                 <div className="flex items-center gap-1.5 text-white/50">
                   <Bot className="size-3.5" strokeWidth={1.5} />
@@ -301,48 +273,27 @@ export function InnovationCanvas() {
                 </div>
                 <h4 className="mt-3 text-xs font-semibold text-white">Cache Router Pipeline</h4>
 
-                {/* Visual model node representation */}
-                <div
-                  className="mt-3 flex items-center gap-1 bg-black/60 p-2 rounded-lg text-[9px] text-white/60"
-                  style={{
-                    borderColor: "rgba(255,255,255,0.05)",
-                    borderWidth: "1px",
-                  }}
-                >
+                <div className="mt-3 flex items-center gap-1 rounded-lg border border-white/5 bg-black/60 p-2 text-[9px] text-white/60">
                   <span>Input</span>
                   <span className="text-white/30">→</span>
                   <span className="text-white">LLM Router</span>
                   <span className="text-white/30">→</span>
-                  <span
-                    className="rounded-lg px-1 font-medium text-white"
-                    style={{
-                      backgroundColor: "rgba(255,255,255,0.10)",
-                    }}
-                  >
+                  <span className="rounded-lg bg-white/10 px-1 font-medium text-white">
                     Claude 3.5
                   </span>
                 </div>
 
                 <div className="mt-3 flex items-center gap-1.5 text-[9px] text-white/40">
-                  <Sparkles className="size-3 text-white/60 animate-pulse" />
+                  <Sparkles className="size-3 animate-pulse text-white/60" />
                   <span>Cost savings: 42% on repetitive logs</span>
                 </div>
-              </div>
+              </CanvasCard>
 
-              {/* CARD 5: Telemetry Insights progress bar */}
-              <div
-                style={{
-                  position: "absolute",
-                  top: "68%",
-                  left: "5%",
-                  transform: isHovered
-                    ? `translate(${mouse.x * -10}px, ${mouse.y * -10}px)`
-                    : "translate(0px, 0px)",
-                  transition: "transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)",
-                  borderColor: "rgba(255,255,255,0.14)",
-                  borderWidth: "1px",
-                }}
-                className="z-10 w-full max-w-[200px] bg-transparent p-4 rounded-lg transition-all duration-300 hover:border-[rgba(255,255,255,0.25)] hover:bg-[rgba(255,255,255,0.01)] hover:scale-[1.015]"
+              <CanvasCard
+                position={{ top: "68%", left: "5%" }}
+                intensity={cardMotion.cardFive}
+                hover={isHovered}
+                className="z-10 w-full max-w-[200px] rounded-lg bg-transparent p-4 transition-all duration-300 hover:scale-[1.015] hover:border-white/25 hover:bg-white/[0.01]"
               >
                 <div className="flex items-center gap-1.5 text-white/50">
                   <BarChart3 className="size-3.5" strokeWidth={1.5} />
@@ -350,56 +301,41 @@ export function InnovationCanvas() {
                 </div>
 
                 <div className="mt-3 flex items-baseline gap-2">
-                  <span className="text-2xl font-bold tracking-tight text-white font-mono">
+                  <span className="font-mono text-2xl font-bold tracking-tight text-white">
                     120ms
                   </span>
-                  <span className="text-[9px] text-emerald-500 font-medium">▲ 4x Faster</span>
+                  <span className="text-[9px] font-medium text-emerald-500">▲ 4x Faster</span>
                 </div>
 
                 <p className="mt-1.5 text-[9px] text-white/50">Server response latency</p>
 
-                {/* Pulsing loading bar */}
-                <div
-                  className="mt-3 h-1 w-full overflow-hidden rounded-full"
-                  style={{
-                    backgroundColor: "rgba(255,255,255,0.05)",
-                  }}
-                >
+                <div className="mt-3 h-1 w-full overflow-hidden rounded-full bg-white/5">
                   <motion.div
-                    className="h-full bg-white origin-left"
+                    className="h-full origin-left bg-white"
                     animate={{ scaleX: [0.15, 0.85, 0.15] }}
                     transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
                   />
                 </div>
-              </div>
+              </CanvasCard>
 
-              {/* CARD 6: Speech bubble Feedback Bubble */}
-              <div
-                style={{
-                  position: "absolute",
-                  top: "70%",
-                  left: "52%",
-                  transform: isHovered
-                    ? `translate(${mouse.x * 18}px, ${mouse.y * 18}px)`
-                    : "translate(0px, 0px)",
-                  transition: "transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)",
-                  borderColor: "rgba(255,255,255,0.14)",
-                  borderWidth: "1px",
-                }}
-                className="z-10 w-full max-w-[230px] bg-transparent p-4 rounded-lg transition-all duration-300 hover:border-[rgba(255,255,255,0.25)] hover:bg-[rgba(255,255,255,0.01)] hover:scale-[1.015]"
+              <CanvasCard
+                position={{ top: "70%", left: "52%" }}
+                intensity={cardMotion.cardSix}
+                hover={isHovered}
+                className="z-10 w-full max-w-[230px] rounded-lg bg-transparent p-4 transition-all duration-300 hover:scale-[1.015] hover:border-white/25 hover:bg-white/[0.01]"
               >
                 <div className="flex items-center gap-1.5 text-white/50">
                   <MessageSquare className="size-3.5" strokeWidth={1.5} />
                   <span className="text-[9px] uppercase tracking-wider">User Feedback</span>
                 </div>
                 <blockquote className="mt-3 text-[10px] leading-relaxed text-white/70 italic">
-                  &ldquo;The cache routing middleware reduced our cloud model cost by 40% with zero
-                  latency penalty.&rdquo;
+                  “The cache routing middleware reduced our cloud model cost by 40% with zero
+                  latency penalty.”
                 </blockquote>
-                <div className="mt-3 text-[9px] text-white/40 text-right">
+                <div className="mt-3 text-right text-[9px] text-white/40">
                   — Frontend Lead Architect
                 </div>
-              </div>
+              </CanvasCard>
             </div>
           </div>
         </div>

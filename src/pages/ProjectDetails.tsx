@@ -229,7 +229,7 @@ export default function ProjectDetails() {
               transition={{ duration: 0.5, delay: index * 0.08, ease }}
               className="flex items-start gap-4 rounded-xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl transition hover:border-white/20 hover:bg-white/8"
             >
-              <div className="mt-1 flex-shrink-0 rounded-full bg-blue-500/10 p-2">
+              <div className="mt-1 shrink-0 rounded-full bg-blue-500/10 p-2">
                 <CheckCircle2 className="size-4 text-blue-400" strokeWidth={1.5} />
               </div>
               <span className="text-base text-white/80">{feature}</span>
@@ -276,7 +276,7 @@ export default function ProjectDetails() {
               transition={{ duration: 0.5, delay: index * 0.1, ease }}
               className="flex items-center gap-6 rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl"
             >
-              <div className="flex-shrink-0 rounded-full bg-white/10 p-3">
+              <div className="shrink-0 rounded-full bg-white/10 p-3">
                 <step.icon className="size-5 text-white" strokeWidth={1.5} />
               </div>
               <div className="flex-1">
@@ -392,7 +392,7 @@ export default function ProjectDetails() {
               transition={{ duration: 0.5, delay: index * 0.1, ease }}
               className="flex items-start gap-4 rounded-xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl"
             >
-              <div className="mt-1 flex-shrink-0 rounded-full bg-green-500/10 p-2">
+              <div className="mt-1 shrink-0 rounded-full bg-green-500/10 p-2">
                 <Award className="size-4 text-green-400" strokeWidth={1.5} />
               </div>
               <span className="text-base text-white/80">{result}</span>
@@ -485,7 +485,7 @@ export default function ProjectDetails() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-sm"
+            className="fixed inset-0 z-100 flex items-center justify-center bg-black/95 backdrop-blur-sm"
             onClick={() => setSelectedImage(null)}
           >
             <button

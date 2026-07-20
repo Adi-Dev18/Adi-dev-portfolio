@@ -36,6 +36,10 @@ export function Hero() {
             className="hero-portrait absolute inset-0 h-full w-full object-cover object-center"
             width={1536}
             height={1024}
+            loading="eager"
+            decoding="async"
+            fetchPriority="high"
+            sizes="(max-width: 768px) 100vw, 50vw"
           />
           <div className="absolute inset-0 z-20 bg-[radial-gradient(circle_at_52%_43%,transparent_30%,rgba(0,0,0,0.25)_58%,rgba(0,0,0,0.92)_94%)]" />
           <div className="hero-image-grain absolute inset-0 z-30 opacity-25 mix-blend-screen" />

@@ -1,6 +1,4 @@
 import omnifood from "@/assets/omnifood.png";
-import projectAtelier from "@/assets/project-atelier.jpg";
-import projectLumen from "@/assets/project-lumen.jpg";
 import project1 from "@/assets/project1.png";
 import amazonQDeveloper from "@/assets/Amazon Q Developer.png";
 import amazonQIntroduction from "@/assets/Amazon Q Introduction.png";
@@ -63,11 +61,37 @@ export const projects = [
     title: "Women's Safety Analytics Platform",
     category: "Analytics Platform",
     description:
-      "A comprehensive analytics platform for women's safety with real-time data visualization, incident tracking, and predictive analytics to enhance community safety measures.",
+      "A data-heavy safety experience that combines product thinking, analytics workflows, and a strong visual storytelling layer.",
+    fullDescription:
+      "This project was shaped as a practical analytics product for community safety reporting, combining information architecture, visual summaries, and clear incident triage flows for a complex domain.",
     image: project1,
-    tech: ["Python"],
+    tech: ["Python", "Data Visualization", "Analytics"],
     github: "https://github.com/Adi-Dev18/RTRP-PROJECT",
     featured: true,
+    status: "Completed",
+    year: "2025",
+    problem:
+      "The original workflow depended on fragmented information and lacked a clear way to interpret safety trends quickly.",
+    solution:
+      "I structured the experience around data clarity, prioritizing readable dashboards, streamlined reporting, and stronger decision support.",
+    goal: "Create a product that makes safety monitoring feel actionable rather than overwhelming.",
+    technologies: ["Python", "Data Visualization", "Analytics", "Product Thinking"],
+    features: [
+      "Interactive dashboards",
+      "Incident-focused reporting views",
+      "Clear information hierarchy",
+      "Performance-minded data presentation",
+    ],
+    challenges: [
+      "Turning a sensitive domain into a calm, usable experience without losing essential detail.",
+    ],
+    solutions: [
+      "The interface was simplified around key workflows and supported with clear visual structure.",
+    ],
+    screenshots: [project1],
+    results: [
+      "Delivered a stronger information architecture for decision-making and stakeholder review.",
+    ],
   },
   {
     id: "02",
@@ -75,12 +99,38 @@ export const projects = [
     title: "OmniFood",
     category: "Food Delivery App",
     description:
-      "A modern food delivery application with real-time order tracking, restaurant discovery, and seamless checkout experience for hungry customers.",
+      "A polished front-end experience focused on conversion, clarity, and a premium mobile-first product feel.",
+    fullDescription:
+      "OmniFood was built as a conversion-driven landing experience that balances strong design, thoughtful interactions, and a reliable content structure for a modern food ordering brand.",
     image: omnifood,
     tech: ["HTML", "CSS", "JS"],
     github: "https://github.com/adityaladdu/omnifood",
     liveDemo: "https://adityasharma18.netlify.app/",
     featured: true,
+    status: "Completed",
+    year: "2024",
+    problem:
+      "The experience needed to feel fast, trustworthy, and visually confident while staying lightweight.",
+    solution:
+      "I focused on a clean layout system, strong hierarchy, and motion that supports the product without feeling ornamental.",
+    goal: "Ship a highly polished front-end experience that feels modern and credible on first impression.",
+    technologies: ["HTML", "CSS", "JavaScript", "Responsive Design"],
+    features: [
+      "Mobile-first layout",
+      "Conversion-focused calls to action",
+      "Clear visual hierarchy",
+      "Accessible interaction patterns",
+    ],
+    challenges: [
+      "Balancing visual richness with a lightweight implementation that stays performant.",
+    ],
+    solutions: [
+      "The build was kept modular and content-led, with interactions tuned for clarity rather than noise.",
+    ],
+    screenshots: [omnifood],
+    results: [
+      "Produced a clean, reliable front-end experience that communicates confidence and polish.",
+    ],
   },
 ];
 

@@ -45,7 +45,6 @@ export function Nav() {
   }, [isOpen]);
 
   useEffect(() => {
-    // Set active section based on current route
     if (location.pathname === "/projects" || location.pathname.startsWith("/projects/")) {
       setActiveSection("/projects");
     } else if (location.pathname === "/") {
@@ -74,7 +73,6 @@ export function Nav() {
   }, [location]);
 
   const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
-    // If it's a route (starts with /), let it navigate normally
     if (id.startsWith("/")) {
       return;
     }
@@ -138,13 +136,11 @@ export function Nav() {
         className="fixed inset-x-0 top-0 z-50 bg-background/70 backdrop-blur-md"
       >
         <div className="container-page flex items-center justify-between py-5 md:py-6">
-          {/* Logo / Name */}
           <Link to="/" className="flex items-center gap-2 transition-opacity hover:opacity-70">
             <img src={logo} alt="Aditya" className="h-6 w-6" />
             <span className="text-[0.75rem] tracking-[0.4em] text-white/75">Aditya</span>
           </Link>
 
-          {/* Nav links - hidden on mobile */}
           <nav className="hidden lg:flex items-center gap-7 md:gap-10 relative">
             {links.map(([label, id]) => {
               const isActive = activeSection === id || activeSection === getSectionId(id);
@@ -189,7 +185,6 @@ export function Nav() {
             })}
           </nav>
 
-          {/* Right side: Available dot (desktop) or Hamburger (mobile) */}
           <div className="flex items-center gap-4">
             {/* Available dot - hidden on mobile */}
             <a
@@ -205,6 +200,7 @@ export function Nav() {
               type="button"
               onClick={() => setIsOpen(true)}
               aria-label="Open navigation menu"
+              aria-expanded={isOpen}
               className="lg:hidden flex items-center"
             >
               <Menu
@@ -215,14 +211,12 @@ export function Nav() {
           </div>
         </div>
 
-        {/* Scroll progress bar */}
         <motion.div
           style={{ scaleX, background: "rgba(255, 255, 255, 0.14)" }}
           className="absolute bottom-0 left-0 right-0 h-px origin-left"
         />
       </motion.header>
 
-      {/* Fullscreen overlay menu */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -231,6 +225,9 @@ export function Nav() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             className="fixed inset-0 z-60 bg-black"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Navigation menu"
             onClick={() => setIsOpen(false)}
           >
             <motion.div
@@ -241,7 +238,6 @@ export function Nav() {
               className="absolute inset-0 flex flex-col items-center justify-center"
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Close button */}
               <button
                 type="button"
                 onClick={() => setIsOpen(false)}
@@ -254,7 +250,6 @@ export function Nav() {
                 />
               </button>
 
-              {/* Menu links */}
               <nav className="flex flex-col items-center gap-8">
                 {links.map(([label, id], index) => (
                   <motion.div
