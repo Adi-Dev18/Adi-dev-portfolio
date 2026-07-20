@@ -51,9 +51,9 @@ export const diploma = {
 };
 
 export const techStack = {
-  core: ["HTML", "CSS", "React", "Tailwind CSS"],
-  languages: ["JavaScript", "TypeScript", "Python"],
-  tools: ["Git", "Vite", "Framer Motion", "React Router", "React Hook Form"],
+  core: ["HTML", "CSS", "Python"],
+  languages: ["JavaScript", "TypeScript", "React", "Tailwind CSS"],
+  tools: ["Git", "Vite", "Framer Motion", "React Router"],
 };
 
 export const projects = [

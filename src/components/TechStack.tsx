@@ -274,17 +274,17 @@ export function TechStack() {
 
           {tab === "stack" ? (
             <div className="space-y-8">
-              <TechCategory label="Core" items={techStack.core} icon={Code2} />
+              <TechCategory label="Core" items={techStack.core ?? []} icon={Code2} />
               <div
                 className="h-px w-full bg-white/[0.06]"
                 style={{ background: "rgba(255,255,255,0.08)" }}
               />
-              <TechCategory label="Languages" items={techStack.languages} icon={Wrench} />
+              <TechCategory label="Upskilling" items={techStack.languages ?? []} icon={Wrench} />
               <div
                 className="h-px w-full bg-white/[0.06]"
                 style={{ background: "rgba(255,255,255,0.08)" }}
               />
-              <TechCategory label="Tools" items={techStack.tools} icon={Wrench} />
+              <TechCategory label="Tools" items={techStack.tools ?? []} icon={Wrench} />
             </div>
           ) : tab === "education" ? (
             <EducationCard />
