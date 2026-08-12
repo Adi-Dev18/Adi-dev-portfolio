@@ -170,8 +170,15 @@ body {
   line-height: 0.92;
 }
 
+.hero-visual {
+  width: min(100vw, 1600px);
+  height: 100%;
+}
+
 .hero-portrait {
   filter: contrast(1.08) grayscale(0.15) brightness(0.88);
+  display: block;
+  margin-inline: auto;
 }
 
 .hero-image-grain {

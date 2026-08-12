@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import heroPortrait from "@/assets/aditya-about-new.png";
+import heroPortrait from "@/assets/aditya-r.png";
 import { ease } from "@/lib/motion";
 import { Download, Linkedin, Github, Mail } from "lucide-react";
 import { social } from "@/lib/portfolio-data";
@@ -16,7 +16,7 @@ export function Hero() {
   const imgScale = useTransform(scrollYProgress, [0, 1], [1, 1.04]);
 
   return (
-    <section ref={ref} className="relative isolate min-h-svh overflow-hidden pt-28 md:pt-32">
+    <section ref={ref} className="relative isolate h-screen overflow-hidden pt-28 md:pt-32">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_24%,rgba(255,255,255,0.04),transparent_32%)]"
@@ -27,21 +27,21 @@ export function Hero() {
         initial={{ opacity: 0, filter: "blur(20px)" }}
         animate={{ opacity: 1, filter: "blur(0px)" }}
         transition={{ duration: 1.8, delay: 0, ease }}
-        className="pointer-events-none absolute inset-0 z-0"
+        className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center"
       >
-        <div className="absolute inset-0 overflow-hidden">
+        <div className="hero-visual relative h-full w-full overflow-hidden">
           <img
             src={heroPortrait}
             alt="Aditya cinematic portrait"
-            className="hero-portrait absolute inset-0 h-full w-full object-cover object-center"
+            className="hero-portrait h-full w-full object-cover object-center"
             width={1536}
             height={1024}
             loading="eager"
             decoding="async"
             fetchPriority="high"
-            sizes="(max-width: 768px) 100vw, 50vw"
+            sizes="100vw"
           />
-          <div className="absolute inset-0 z-20 bg-[radial-gradient(circle_at_52%_43%,transparent_30%,rgba(0,0,0,0.25)_58%,rgba(0,0,0,0.92)_94%)]" />
+          <div className="absolute inset-0 z-20 bg-[radial-gradient(circle_at_50%_40%,rgba(0,0,0,0.08),rgba(0,0,0,0.18)_42%,rgba(0,0,0,0.38)_100%)]" />
           <div className="hero-image-grain absolute inset-0 z-30 opacity-25 mix-blend-screen" />
         </div>
       </motion.div>

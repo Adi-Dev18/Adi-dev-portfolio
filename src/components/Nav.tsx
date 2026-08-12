@@ -137,7 +137,9 @@ export function Nav() {
       >
         <div className="container-page flex items-center justify-between py-5 md:py-6">
           <Link to="/" className="flex items-center gap-2 transition-opacity hover:opacity-70">
-            <img src={logo} alt="Aditya" className="h-6 w-6" />
+            <a>
+              <img src={logo} alt="Aditya" className="h-6 w-6" />
+            </a>
             <span className="text-[0.75rem] tracking-[0.4em] text-white/75">Aditya</span>
           </Link>
 
@@ -192,7 +194,7 @@ export function Nav() {
               className="hidden lg:flex items-center gap-2 text-[0.75rem] tracking-[0.3em] text-white/75 transition-opacity hover:opacity-70"
             >
               <span className="inline-block size-1.5 rounded-full bg-green-400/80" />
-              Available
+              Connect
             </a>
 
             {/* Mobile hamburger menu */}

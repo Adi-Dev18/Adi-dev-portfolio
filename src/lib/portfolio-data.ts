@@ -5,6 +5,7 @@ import amazonQIntroduction from "@/assets/Amazon Q Introduction.png";
 import azureMachineLearning from "@/assets/Azure Machine Learning.png";
 import dataAnalysis from "@/assets/Data Analysis.png";
 import developerTools from "@/assets/Developer tools.png";
+import awsRag from "@/assets/Screenshot 2026-07-27 223140.png";
 import udemyHtmlCss from "@/assets/udemy html&css.png";
 import novus24 from "@/assets/Novus24.png";
 import technovanza from "@/assets/Technovanza.png";
@@ -190,9 +191,16 @@ export const certifications = [
   {
     id: "amazon-q-developer",
     org: "Amazon Web Services",
-    title: "Amazon Q Developer",
+    title: "Amazon Q Developer Getting Started",
     verifyUrl: undefined as string | undefined,
     images: [amazonQDeveloper],
+  },
+  {
+    id: "aws-rag-apps",
+    org: "AWS Training & Certification",
+    title: "Designing Secure Retrieval Augmented Generation (RAG) Applications with AWS",
+    verifyUrl: undefined as string | undefined,
+    images: [awsRag],
   },
   {
     id: "udemy-html-css",
