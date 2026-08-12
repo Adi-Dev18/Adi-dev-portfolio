@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import heroPortrait from "@/assets/aditya-hero.png";
+import heroPortrait from "@/assets/aditya-about-new.png";
 import { ease } from "@/lib/motion";
 import { Download, Linkedin, Github, Mail } from "lucide-react";
 import { social } from "@/lib/portfolio-data";
